@@ -1,0 +1,785 @@
+fileFormatVersion: 2
+guid: 834bc2098988e4c4b97e14d93193418d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: SlicedBoxes_0
+  - first:
+      213: 21300002
+    second: SlicedBoxes_1
+  - first:
+      213: 21300004
+    second: SlicedBoxes_2
+  - first:
+      213: 21300006
+    second: SlicedBoxes_3
+  - first:
+      213: 21300008
+    second: SlicedBoxes_4
+  - first:
+      213: 21300010
+    second: SlicedBoxes_5
+  - first:
+      213: 21300012
+    second: SlicedBoxes_6
+  - first:
+      213: 21300014
+    second: SlicedBoxes_7
+  - first:
+      213: 21300016
+    second: SlicedBoxes_8
+  - first:
+      213: 21300018
+    second: SlicedBoxes_9
+  - first:
+      213: 21300020
+    second: SlicedBoxes_10
+  - first:
+      213: 21300022
+    second: SlicedBoxes_11
+  - first:
+      213: 21300024
+    second: GreyBtn
+  - first:
+      213: 21300026
+    second: SlicedBoxes_13
+  - first:
+      213: 21300028
+    second: SlicedBoxes_14
+  - first:
+      213: 21300030
+    second: SlicedBoxes_15
+  - first:
+      213: 21300032
+    second: SlicedBoxes_16
+  - first:
+      213: 21300034
+    second: SlicedBoxes_17
+  - first:
+      213: 21300036
+    second: SlicedBoxes_18
+  - first:
+      213: 21300038
+    second: SlicedBoxes_19
+  - first:
+      213: 21300040
+    second: SlicedBoxes_20
+  - first:
+      213: 21300042
+    second: SlicedBoxes_21
+  - first:
+      213: 21300044
+    second: SlicedBoxes_22
+  - first:
+      213: 21300046
+    second: SlicedBoxes_23
+  - first:
+      213: 21300048
+    second: SlicedBoxes_24
+  - first:
+      213: 21300050
+    second: SlicedBoxes_25
+  - first:
+      213: 21300052
+    second: SlicedBoxes_26
+  - first:
+      213: 21300054
+    second: SlicedBoxes_27
+  - first:
+      213: 21300056
+    second: SlicedBoxes_28
+  - first:
+      213: 21300058
+    second: SlicedBoxes_29
+  - first:
+      213: 21300060
+    second: SlicedBoxes_30
+  - first:
+      213: 21300062
+    second: SlicedBoxes_31
+  - first:
+      213: 21300064
+    second: SlicedBoxes_32
+  - first:
+      213: 21300066
+    second: SlicedBoxes_33
+  - first:
+      213: 21300068
+    second: SlicedBoxes_34
+  - first:
+      213: 21300070
+    second: SlicedBoxes_35
+  - first:
+      213: 21300072
+    second: SlicedBoxes_36
+  - first:
+      213: 21300074
+    second: SlicedBoxes_37
+  - first:
+      213: 21300076
+    second: SlicedBoxes_38
+  - first:
+      213: 21300078
+    second: SlicedBoxes_39
+  - first:
+      213: 21300080
+    second: SlicedBoxes_40
+  - first:
+      213: 21300082
+    second: SlicedBoxes_41
+  - first:
+      213: 21300084
+    second: SlicedBoxes_42
+  - first:
+      213: 21300086
+    second: SlicedBoxes_43
+  - first:
+      213: 21300088
+    second: SlicedBoxes_44
+  - first:
+      213: 21300090
+    second: SlicedBoxes_45
+  - first:
+      213: 21300092
+    second: SlicedBoxes_46
+  - first:
+      213: 21300094
+    second: SlicedBoxes_47
+  - first:
+      213: 21300096
+    second: SlicedBoxes_48
+  - first:
+      213: 21300098
+    second: SlicedBoxes_49
+  - first:
+      213: 21300100
+    second: SlicedBoxes_50
+  - first:
+      213: 21300102
+    second: SlicedBoxes_51
+  - first:
+      213: 21300104
+    second: SlicedBoxes_52
+  - first:
+      213: 21300106
+    second: SlicedBoxes_53
+  - first:
+      213: 21300108
+    second: SlicedBoxes_54
+  - first:
+      213: 21300110
+    second: SlicedBoxes_55
+  - first:
+      213: 21300112
+    second: SlicedBoxes_56
+  - first:
+      213: 21300114
+    second: SlicedBoxes_57
+  - first:
+      213: 21300116
+    second: SlicedBoxes_58
+  - first:
+      213: 21300118
+    second: SlicedBoxes_59
+  - first:
+      213: 21300120
+    second: SlicedBoxes_60
+  - first:
+      213: 21300122
+    second: SlicedBoxes_61
+  - first:
+      213: 21300124
+    second: SlicedBoxes_62
+  - first:
+      213: 21300126
+    second: SlicedBoxes_63
+  - first:
+      213: 21300128
+    second: SlicedBoxes_64
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  swizzle: 50462976
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SlicedBoxes_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 25
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 12, y: 12, z: 12, w: 12}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2143406ccfcac4c4eacb7ecab2355b17
+      internalID: 21300000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlicedBoxes_1
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 1
+        width: 25
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 12, y: 12, z: 12, w: 12}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01a4f91520c115046b3e720f23064f17
+      internalID: 21300002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlicedBoxes_2
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 1
+        width: 25
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 12, y: 12, z: 12, w: 12}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ded91b13b0b59840b9d396682acf38b
+      internalID: 1884932953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlicedBoxes_3
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 1
+        width: 25
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 12, y: 12, z: 12, w: 12}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f24b36ec97f55c468d729cc2b71be4c
+      internalID: 1862095936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlicedBoxes_4
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 1
+        width: 25
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 12, y: 12, z: 12, w: 12}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f18da272ea529bb428b7f79a1cc91ba2
+      internalID: 1964817822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlicedBoxes_5
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 1
+        width: 25
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 12, y: 12, z: 12, w: 12}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60422f282f671b648bbcc82a862fa211
+      internalID: 323053516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlicedBoxes_6
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 1
+        width: 25
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 12, y: 12, z: 12, w: 12}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e51e2062a5a30fd4e9e8b3466aae7d97
+      internalID: 310703468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlicedBoxes_7
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 1
+        width: 25
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 12, y: 12, z: 12, w: 12}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a9a7545de3e1ac4e9d4ac5139a2967f
+      internalID: 1789600288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlicedBoxes_8
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 66
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 8, y: 8, z: 8, w: 8}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a44a49d45c941df4ebc1a50b30cd8539
+      internalID: -1360894558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlicedBoxes_9
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 1
+        width: 25
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 12, y: 12, z: 12, w: 12}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71c2f39f17a931f40a956e47cf012934
+      internalID: -85653770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlicedBoxes_10
+      rect:
+        serializedVersion: 2
+        x: 235
+        y: 1
+        width: 25
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 12, y: 12, z: 12, w: 12}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 668d6fe7cbdc1b04a9cf5d133ba6c879
+      internalID: -297752701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 99
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 127d770a09771c245801a7b681251cde
+      internalID: 1840710132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_1
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 66
+        width: 28
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: baeaf315bb46b0747a5d59d6b2c61dcf
+      internalID: 366501740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_3
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 66
+        width: 44
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2535a81d8cb7d824abdda11dd6d637b7
+      internalID: -776071507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_2
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 99
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 017ef6fcdc0ccd14ea75ee72226d6cd8
+      internalID: 324526782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_4
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 96
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86df9308a86d95d4894e3fad93a18a10
+      internalID: 1897501389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_5
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 1
+        width: 25
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 12, y: 12, z: 12, w: 12}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d20a307ee562014b8101e72d7adb826
+      internalID: 761716468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_6
+      rect:
+        serializedVersion: 2
+        x: 287
+        y: 1
+        width: 25
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 12, y: 12, z: 12, w: 12}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51d497977106683479d9c22654423b98
+      internalID: -933475520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_7
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 66
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 5, y: 5, z: 5, w: 5}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce1ee1794553b7e4fa394da5e29c6bcc
+      internalID: 1596827989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_8
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 66
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 5, y: 5, z: 5, w: 5}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c18990eb87f79d149a07e8a7dea461ad
+      internalID: 458391972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: b6824bc6dc58abb4f896f89fe518d889
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Atlas_0: 1840710132
+      Atlas_1: 366501740
+      Atlas_2: 324526782
+      Atlas_3: -776071507
+      Atlas_4: 1897501389
+      Atlas_5: 761716468
+      Atlas_6: -933475520
+      Atlas_7: 1596827989
+      Atlas_8: 458391972
+      SlicedBoxes_0: 21300000
+      SlicedBoxes_1: 21300002
+      SlicedBoxes_10: -297752701
+      SlicedBoxes_2: 1884932953
+      SlicedBoxes_3: 1862095936
+      SlicedBoxes_4: 1964817822
+      SlicedBoxes_5: 323053516
+      SlicedBoxes_6: 310703468
+      SlicedBoxes_7: 1789600288
+      SlicedBoxes_8: -1360894558
+      SlicedBoxes_9: -85653770
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
