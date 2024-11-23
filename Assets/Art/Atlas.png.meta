@@ -709,7 +709,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 5, y: 5, z: 5, w: 5}
       customData: 
       outline: []
@@ -731,7 +731,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 5, y: 5, z: 5, w: 5}
       customData: 
       outline: []
@@ -740,6 +740,50 @@ TextureImporter:
       bones: []
       spriteID: c18990eb87f79d149a07e8a7dea461ad
       internalID: 458391972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_9
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 1
+        width: 25
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 12, y: 12, z: 12, w: 12}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab3494efbe5f9d846b18e01e47fae3ed
+      internalID: -1515578973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas_10
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 1
+        width: 25
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 12, y: 12, z: 12, w: 12}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54f758766348f5d4ea64c231b42110b7
+      internalID: -1796046230
       vertices: []
       indices: 
       edges: []
@@ -760,6 +804,7 @@ TextureImporter:
     nameFileIdTable:
       Atlas_0: 1840710132
       Atlas_1: 366501740
+      Atlas_10: -1796046230
       Atlas_2: 324526782
       Atlas_3: -776071507
       Atlas_4: 1897501389
@@ -767,6 +812,7 @@ TextureImporter:
       Atlas_6: -933475520
       Atlas_7: 1596827989
       Atlas_8: 458391972
+      Atlas_9: -1515578973
       SlicedBoxes_0: 21300000
       SlicedBoxes_1: 21300002
       SlicedBoxes_10: -297752701
