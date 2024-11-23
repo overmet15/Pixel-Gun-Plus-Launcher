@@ -1,30 +1,27 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class PreviewImage : MonoBehaviour
 {
     [SerializeField] private Image image;
     [SerializeField] private Image myImage;
-    private string link => $"https://pixelgun.plus/~1031/Screenshots/{Random.Range(1, 3)}.png";
-    IEnumerator Start()
+    void Start()
     {
-        image.enabled = myImage.enabled = false;
-        UnityWebRequest request = UnityWebRequestTexture.GetTexture(link);
-        yield return request.SendWebRequest();
-
-        if (request.result != UnityWebRequest.Result.Success)
+        if (Preload.previewImage == null) 
         {
-            Debug.LogError("Error downloading texture: " + request.error);
-            yield break;
+            image.enabled = myImage.enabled = false;
         }
-
-        Texture2D texture = DownloadHandlerTexture.GetContent(request);
-
-        // Create a sprite from the texture
-        Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-        image.sprite = sprite;
-        image.enabled = myImage.enabled = true;
+        else image.sprite = Preload.previewImage;
+        //StartCoroutine(Loop(0));
     }
+
+    /*IEnumerator Loop(int current) - I need to optimize smth first
+    {
+        if (current > Preload.previewImages.Count) current = 0;
+
+        image.sprite = Preload.previewImages[current];
+        yield return new WaitForSecondsRealtime(15);
+        StartCoroutine(Loop(current));
+    }*/
 }

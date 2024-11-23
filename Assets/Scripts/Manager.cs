@@ -29,15 +29,12 @@ public class Manager : MonoBehaviour
     IEnumerator Start()
     {
         ProcessHandler.unaviableScreen = unaviableScreen;
-        yield return StartCoroutine(GetCurrentVersion());
-
         if (File.Exists(TempZipPath))
         {
             StartCoroutine(AfterDownload());
             yield break;
         }
 
-        ProcessHandler.hWnd = ProcessHandler.GetForegroundWindow();
         Application.runInBackground = true;
 
         downloading.SetActive(false);
@@ -49,9 +46,9 @@ public class Manager : MonoBehaviour
             string s = File.ReadAllText(GamePath + "/version.txt");
             string[] ss = s.Split('.');
 
-            if (currentPatch > int.Parse(ss[2])) needsDownload = true;
-            else if (currentUpdate > int.Parse(ss[1])) needsDownload = true;
-            else if (currentRelease > int.Parse(ss[0])) needsDownload = true;
+            if (Preload.GameVersion.major > int.Parse(ss[0])) needsDownload = true;
+            else if (Preload.GameVersion.minor > int.Parse(ss[1])) needsDownload = true;
+            else if (Preload.GameVersion.patch > int.Parse(ss[2])) needsDownload = true;
             hasBuild = true;
         }
         else
@@ -72,28 +69,13 @@ public class Manager : MonoBehaviour
         }
         else
         {
-            verText.text = $"{currentRelease}.{currentUpdate}.{currentPatch}";
+            verText.text = $"{Preload.GameVersion.major}.{Preload.GameVersion.minor}.{Preload.GameVersion.patch}";
             mainText.text = "Play";
         }
 
         yield return new WaitForSeconds(1f); // finish anim
 
         canvasAnimator.SetTrigger("C");
-    }
-    
-    IEnumerator GetCurrentVersion()
-    {
-        UnityWebRequest request = UnityWebRequest.Get("https://pixelgun.plus/~1031/Downloads/version.txt");
-
-        yield return request.SendWebRequest();
-
-        if (request.result != UnityWebRequest.Result.Success) Application.Quit();
-
-        string[] s = request.downloadHandler.text.Split(".");
-
-        currentRelease = int.Parse(s[0]);
-        currentUpdate = int.Parse(s[1]);
-        currentPatch = int.Parse(s[2]);
     }
 
     IEnumerator Download()
@@ -110,7 +92,6 @@ public class Manager : MonoBehaviour
 
         while (!request.isDone)
         {
-            int downloadedMB = Mathf.RoundToInt(request.downloadedBytes / (1024f * 1024f));
             procentText.text = Mathf.RoundToInt(request.downloadProgress * 100) + "%";
 
             slider.value = request.downloadProgress;
@@ -212,5 +193,11 @@ public static class Utils
         {
             Debug.LogError("Error extracting zip file: " + e.Message);
         }
+    }
+    
+    public static Color ColorToUColor(int r, int g, int b, int a = 255)
+    {   
+        Color color = new Color(r / 255f, g / 255f, b / 255f, a / 255f);
+        return color;
     }
 }
