@@ -9,7 +9,11 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
+
+# Unity 6 preiview temp folder
 /.utmp/
+
+# Launcher Game folder created when testing in unity
 /[Gg]ame/
 
 # MemoryCaptures can get excessive in size.
