@@ -6,9 +6,9 @@ public class AfterPreload : MonoBehaviour
     [SerializeField] private Image backgroundImage, topImage, progressImage, logoImage, logoImage2;
     void Awake()
     {
-        logoImage.sprite = logoImage2.sprite = Preload.logoSprite;
-        backgroundImage.sprite = Preload.backgroundSprite;
-        topImage.color = Preload.topBarColor;
-        progressImage.color = Preload.progressBarColor;
+        logoImage.sprite = logoImage2.sprite = Preload.currentThemeObject.logoSprite;
+        backgroundImage.sprite = Preload.currentThemeObject.backgroundSprite;
+        topImage.color = Preload.currentThemeObject.topBarColor;
+        progressImage.color = Preload.currentThemeObject.progressBarColor;
     }
 }
