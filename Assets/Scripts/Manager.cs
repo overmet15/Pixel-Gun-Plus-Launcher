@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using System.Security.Cryptography;
 
 public class Manager : MonoBehaviour
 {
@@ -15,7 +14,8 @@ public class Manager : MonoBehaviour
 
     public bool downloadingGame;
 
-    public void Start()
+    private string verDisp, playDisp; // temporary fix, something else is setting text for no reason.
+    private void Start()
     {
         canvasAnimator.SetBool("UIEnabled", true);
         StartCoroutine(Check(true));
@@ -23,6 +23,8 @@ public class Manager : MonoBehaviour
 
     public IEnumerator Check(bool playAnim)
     {
+        yield return null;
+
         verText.text = string.Empty;
         ProcessHandler.unaviableScreen = unaviableScreen;
         ProcessHandler.mainScreen = mainScreen;
@@ -31,7 +33,7 @@ public class Manager : MonoBehaviour
         downloading.SetActive(false);
         main.SetActive(true);
 
-        if (Global.buildState == BuildState.updateNeeded || Global.buildState == BuildState.upToDate) verText.text = $"{Preload.GameVersion.major}.{Preload.GameVersion.minor}.{Preload.GameVersion.patch}";
+        if (Global.buildState != BuildState.noBuild && Global.buildState != BuildState.unknownBuild) verText.text = Global.localVersion.ToString();
 
         switch (Global.buildState)
         {

@@ -70,7 +70,7 @@ public class DownloadManager : MonoBehaviour
     }
 
     public IEnumerator DownloadGame()
-{
+    {
     UnityWebRequest request = UnityWebRequest.Get(Global.gameDownloadLink);
 
     request.SendWebRequest();
@@ -142,5 +142,4 @@ public class DownloadManager : MonoBehaviour
 
     animator.SetBool("UIEnabled", true);
     }
-
 }

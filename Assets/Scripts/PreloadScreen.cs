@@ -43,7 +43,7 @@ public class PreloadScreen : MonoBehaviour
         yield return StartCoroutine(GetCurrentVersion());
 
         yield return DownloadManager.CheckBuild();
-        
+
         SceneManager.LoadScene("Launcher");
     }
 
@@ -99,14 +99,7 @@ public class PreloadScreen : MonoBehaviour
             yield break;
         }
 
-        string[] s = request.downloadHandler.text.Split(".");
-
-        Preload.GameVersion = new()
-        {
-            major = int.Parse(s[0]),
-            minor = int.Parse(s[1]),
-            patch = int.Parse(s[2])
-        };
+        Preload.GameVersion = Version.Parse(request.downloadHandler.text);
     }
 
     bool ThemeCheck()
