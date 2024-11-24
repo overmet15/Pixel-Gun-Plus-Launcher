@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   topBarColor: {r: 1, g: 0.8039216, b: 0.29411766, a: 0.50980395}
   progressBarColor: {r: 1, g: 0.8039216, b: 0.29411766, a: 1}
-  backgroundSprite: {fileID: 21300000, guid: 4fead88f8648c75438acc8fec3da30c1, type: 3}
-  logoSprite: {fileID: 21300000, guid: ae95327ccdf601841a8df1cd678ed6b1, type: 3}
+  backgroundSprite: {fileID: 21300000, guid: 6f497d6817139f641b79e601d08209b3, type: 3}
+  logoSprite: {fileID: 21300000, guid: ffb12f0f2e9b6ad40b881862dfc6a499, type: 3}

@@ -2183,6 +2183,7 @@ MonoBehaviour:
   main: {fileID: 1158925887}
   downloading: {fileID: 1916753992}
   mainScreen: {fileID: 948043799}
+  background: {fileID: 2057514015}
   canvasAnimator: {fileID: 48388125}
   unaviableScreen: {fileID: 1541674118}
   downloadingGame: 0
