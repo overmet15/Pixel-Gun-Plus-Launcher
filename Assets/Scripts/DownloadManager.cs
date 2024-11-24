@@ -31,7 +31,8 @@ public class DownloadManager : MonoBehaviour
         progressSlider.maxValue = 1;
         progressSlider.value = 0;
 
-        downloadingText.text = $"Downloading {Preload.GameVersion}";
+        //downloadingText.text = $"Downloading {Preload.GameVersion}"; - Disabled due being broken in builds
+        downloadingText.text = $"Downloading...";
         procentText.text = "0%";
 
         currentDownloadState = DownloadState.inProcess;
