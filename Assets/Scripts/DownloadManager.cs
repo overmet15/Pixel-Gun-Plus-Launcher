@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.IO;
 using System.IO.Compression;
@@ -69,62 +70,77 @@ public class DownloadManager : MonoBehaviour
     }
 
     public IEnumerator DownloadGame()
+{
+    UnityWebRequest request = UnityWebRequest.Get(Global.gameDownloadLink);
+
+    request.SendWebRequest();
+
+    while (!request.isDone)
     {
+        procentText.text = (request.downloadProgress * 100).ToString("F1") + "%";
+
+        progressSlider.value = request.downloadProgress;
+
         yield return null;
+    }
 
-        UnityWebRequest request = UnityWebRequest.Get(Global.gameDownloadLink);
-
-        request.SendWebRequest();
-
-        while (!request.isDone)
-        {
-            procentText.text = (request.downloadProgress * 100).ToString("F1") + "%";
-
-            progressSlider.value = request.downloadProgress;
-
-            yield return null;
-        }
-
-        if (request.result != UnityWebRequest.Result.Success)
-        {
-            Debug.LogError(request.error);
-
-            animator.SetBool("UIEnabled", false);
-
-            yield return new WaitForSecondsRealtime(2);
-
-            Application.Quit();
-            yield break;
-        }
-
-        currentDownloadState = DownloadState.finished;
+    if (request.result != UnityWebRequest.Result.Success)
+    {
+        Debug.LogError(request.error);
 
         animator.SetBool("UIEnabled", false);
 
-        yield return new WaitForSeconds(0.5f); // Let it play.
+        yield return new WaitForSecondsRealtime(2);
 
-        FileStream fileStream = new FileStream(Global.TempZipPath, FileMode.Create, FileAccess.Write, FileShare.None);
-        
-        yield return fileStream.WriteAsync(request.downloadHandler.data, 0, request.downloadHandler.data.Length);
-        yield return fileStream.DisposeAsync();
-
-        if (!Directory.Exists(Global.GameFolderPath)) Directory.CreateDirectory(Global.GameFolderPath);
-
-        ZipFile.ExtractToDirectory(Global.TempZipPath, Global.GameFolderPath, true);
-
-        currentDownloadState = DownloadState.notDownloading;
-
-        yield return File.WriteAllTextAsync(Global.GameVersionPath, Preload.GameVersion.ToString());
-
-        downloadingPanel.SetActive(false);
-        playPanel.SetActive(true);
-
-        yield return CheckBuild();
-
-        StartCoroutine(manager.Check(false));
-
-        File.Delete(Global.TempZipPath);
-
-        animator.SetBool("UIEnabled", true);
+        Application.Quit();
+        yield break;
     }
+
+    currentDownloadState = DownloadState.finished;
+
+    animator.SetBool("UIEnabled", false);
+
+    yield return new WaitForSeconds(0.5f); // Let it play.
+
+    using (FileStream fileStream = new FileStream(Global.TempZipPath, FileMode.Create, FileAccess.Write, FileShare.None))
+    {
+        var writeTask = Task.Run(async () => 
+        {
+            await fileStream.WriteAsync(request.downloadHandler.data, 0, request.downloadHandler.data.Length);
+        });
+
+        // Wait until the task completes.
+        yield return new WaitUntil(() => writeTask.IsCompleted);
+    }
+
+    yield return new WaitForSecondsRealtime(0.2f); // Small delay to ensure write completion.
+
+    if (!Directory.Exists(Global.GameFolderPath)) 
+        Directory.CreateDirectory(Global.GameFolderPath);
+
+    try
+    {
+        ZipFile.ExtractToDirectory(Global.TempZipPath, Global.GameFolderPath, true);
+    }
+    catch (Exception ex)
+    {
+        Debug.LogError($"Error extracting zip: {ex.Message}");
+    }
+
+    currentDownloadState = DownloadState.notDownloading;
+
+    yield return File.WriteAllTextAsync(Global.GameVersionPath, Preload.GameVersion.ToString());
+
+    downloadingPanel.SetActive(false);
+    playPanel.SetActive(true);
+
+    yield return CheckBuild();
+
+    StartCoroutine(manager.Check(false));
+
+    File.Delete(Global.TempZipPath);
+
+    animator.SetBool("UIEnabled", true);
+    }
+
 }
