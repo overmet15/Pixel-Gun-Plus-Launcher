@@ -13,7 +13,7 @@ public class Manager : MonoBehaviour
 
     [SerializeField] private Text mainText, verText, downloadingText, procentText;
     [SerializeField] private Slider slider;
-    [SerializeField] private GameObject main, downloading;
+    [SerializeField] private GameObject main, downloading, mainScreen;
     [SerializeField] private Animator canvasAnimator;
 
     private int currentRelease, currentUpdate, currentPatch;
@@ -29,6 +29,7 @@ public class Manager : MonoBehaviour
     IEnumerator Start()
     {
         ProcessHandler.unaviableScreen = unaviableScreen;
+        ProcessHandler.mainScreen = mainScreen;
         if (File.Exists(TempZipPath))
         {
             StartCoroutine(AfterDownload());

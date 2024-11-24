@@ -8,7 +8,7 @@ public static class ProcessHandler
 {
     public static string path => Application.streamingAssetsPath + "/../../Game/Pixel Gun Plus.exe";
     public static Process process;
-    public static GameObject unaviableScreen;
+    public static GameObject unaviableScreen, mainScreen;
     public static void StartMonitoringProcess()
     {
         process = new Process
@@ -36,6 +36,7 @@ public static class ProcessHandler
             if (PrefsManager.closeOnGameStart) Application.Quit();
 
             unaviableScreen.SetActive(true);
+            mainScreen.SetActive(false);
         }
     }
 

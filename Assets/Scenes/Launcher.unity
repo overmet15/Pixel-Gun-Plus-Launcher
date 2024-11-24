@@ -2182,6 +2182,7 @@ MonoBehaviour:
   slider: {fileID: 1706279215}
   main: {fileID: 1158925887}
   downloading: {fileID: 1916753992}
+  mainScreen: {fileID: 948043799}
   canvasAnimator: {fileID: 48388125}
   unaviableScreen: {fileID: 1541674118}
   downloadingGame: 0
