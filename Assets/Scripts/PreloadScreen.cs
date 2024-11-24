@@ -42,6 +42,8 @@ public class PreloadScreen : MonoBehaviour
         yield return StartCoroutine(GetPreviewImages());
         yield return StartCoroutine(GetCurrentVersion());
 
+        yield return DownloadManager.CheckBuild();
+        
         SceneManager.LoadScene("Launcher");
     }
 

@@ -1,11 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct Version
-{
-    public int major, minor, patch;
-}
-
+/// <summary>
+/// Class for preloading web stuff!!! Use Global class instead!
+/// </summary>
 public static class Preload
 {
     public static string currentTheme = string.Empty;
