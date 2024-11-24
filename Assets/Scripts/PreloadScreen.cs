@@ -13,6 +13,7 @@ public class PreloadScreen : MonoBehaviour
     IEnumerator Start()
     {
         string[] args = System.Environment.GetCommandLineArgs();
+        //string[] args = new string[1]{"-theme=Menu_Christmas"};
 
         bool customTheme = false;
         foreach (string arg in args)
