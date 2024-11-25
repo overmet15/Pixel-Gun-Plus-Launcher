@@ -10,5 +10,8 @@ Notice that this launcher has been rushed and not planned to be public, many thi
 
 If you want, you can fork the launcher and/or make custom version of it.
 
+## Useful info:
+- Did you know that you can change theme with -theme=*ThemeName* argument? try it out!
+- 
 Links:
 - [Pixel Gun Plus Website](https://pixelgun.plus/)
