@@ -4,7 +4,7 @@ using UnityEngine;
 public class AfterPreload : MonoBehaviour
 {
     [SerializeField] private Image backgroundImage, topImage, progressImage, logoImage, logoImage2;
-    void Awake()
+    public void Awake()
     {
         logoImage.sprite = logoImage2.sprite = Preload.currentThemeObject.logoSprite;
         backgroundImage.sprite = Preload.currentThemeObject.backgroundSprite;
