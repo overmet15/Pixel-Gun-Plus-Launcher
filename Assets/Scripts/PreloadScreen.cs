@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
@@ -34,7 +32,7 @@ public class PreloadScreen : MonoBehaviour
         
         if (!ThemeCheck())
         {
-            yield return StartCoroutine(Error("Invalid Theme.", $"Invalid Theme: {Preload.currentTheme}", false));
+            Error("Invalid Theme.", $"Invalid Theme: {Preload.currentTheme}");
             Preload.currentTheme = "Menu_Colapsed_City";
         }
 
@@ -56,10 +54,10 @@ public class PreloadScreen : MonoBehaviour
 
         if (request.result != UnityWebRequest.Result.Success)
         {
-            StartCoroutine(Error("Request Error.", request.error));
-            yield break;
+            Error("Theme Request Error.", request.error);
+            Preload.currentTheme = "Menu_Colapsed_City";
         }
-        Preload.currentTheme = request.downloadHandler.text;
+        else Preload.currentTheme = request.downloadHandler.text;
     }
 
     IEnumerator GetPreviewImages()
@@ -85,7 +83,6 @@ public class PreloadScreen : MonoBehaviour
             Texture2D texture = DownloadHandlerTexture.GetContent(request);
             Preload.previewImage = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
         }
-
     }
 
     IEnumerator GetCurrentVersion()
@@ -96,11 +93,24 @@ public class PreloadScreen : MonoBehaviour
 
         if (request.result != UnityWebRequest.Result.Success) 
         {
-            StartCoroutine(Error("Unable to get current version.", $"Couldnt get version: {request.error}"));
+            Error("Unable to get current game version.", $"Couldnt get version: {request.error}");
+            Preload.GameVersion = Version.Parse("0.0.0");
+        }
+        else Preload.GameVersion = Version.Parse(request.downloadHandler.text);
+    }
+    IEnumerator GetCurrentVersionLauncher()
+    {
+        UnityWebRequest request = UnityWebRequest.Get(Global.versionLink);
+
+        yield return request.SendWebRequest();
+
+        if (request.result != UnityWebRequest.Result.Success) 
+        {
+            Error("Unable to get current launcher version.", $"Couldnt get version: {request.error}");
+            Preload.newVersionAviable = false;
             yield break;
         }
-
-        Preload.GameVersion = Version.Parse(request.downloadHandler.text);
+        else Preload.newVersionAviable = Version.Parse(request.downloadHandler.text) == Version.Parse(Application.version);
     }
 
     bool ThemeCheck()
@@ -108,19 +118,12 @@ public class PreloadScreen : MonoBehaviour
         return Resources.Load<Theme>("Themes/" + Preload.currentTheme) != null;
     }
 
-    IEnumerator Error(string error, string debugOutput, bool close = true)
+    void Error(string error, string debugOutput)
     {
         Debug.LogError(debugOutput);
 
         loadingAnimator.enabled = false;
         loadingText.text = error;
         loadingText.color = Utils.ColorToUColor(255, 0, 0);
-
-        if (close)
-        {
-            yield return new WaitForSecondsRealtime(5f);
-
-            Application.Quit();
-        }
     }
 }

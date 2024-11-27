@@ -12,4 +12,6 @@ public static class Preload
     public static Sprite previewImage;
 
     public static Version GameVersion;
+
+    public static bool newVersionAviable;
 }
