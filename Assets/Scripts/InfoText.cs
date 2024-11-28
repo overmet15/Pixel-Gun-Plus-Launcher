@@ -24,6 +24,7 @@ public class InfoText : MonoBehaviour
         {
             text.text = "Click here to download latest launcher update.";
         }
+        else text.text = string.Empty;
 
         clickable.enabled = ClickableShouldBeEnabled();
     }
