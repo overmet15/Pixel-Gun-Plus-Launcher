@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
 
 public class Manager : MonoBehaviour
 {
@@ -88,5 +89,37 @@ public static class Utils
     {   
         Color color = new Color(r / 255f, g / 255f, b / 255f, a / 255f);
         return color;
+    }
+
+    // ChatGPT ahh tool
+    public static string ParseNGUIString(string input)
+    {
+        if (string.IsNullOrEmpty(input))
+            return input;
+
+        // Regex to find [RRGGBB]
+        string pattern = @"\[(\w{6})\]";
+        string replacement = "<color=#$1>";
+
+        // Count the number of color codes [RRGGBB]
+        int colorCount = Regex.Matches(input, pattern).Count;
+
+        // Replace [RRGGBB] with <color=#RRGGBB>
+        string result = Regex.Replace(input, pattern, replacement);
+
+        // Replace [-] with </color>
+        result = result.Replace("[-]", "</color>");
+
+        // Count the number of closing </color> tags
+        int closeTagCount = (result.Length - result.Replace("</color>", "").Length) / "</color>".Length;
+
+        // If there are more color opening tags than closing, append necessary </color> tags
+        if (colorCount > closeTagCount)
+        {
+            int missingCloseTags = colorCount - closeTagCount;
+            result += new string(' ', missingCloseTags).Replace(" ", "</color>");
+        }
+
+        return result;
     }
 }
