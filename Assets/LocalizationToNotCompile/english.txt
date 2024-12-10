@@ -1,0 +1,6 @@
+# Key\Value\FontSize (optional)
+#
+# Setup line, must have font size.
+LanguageName\English\30
+#
+loading\Loading\128
