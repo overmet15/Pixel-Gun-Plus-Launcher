@@ -10,6 +10,7 @@ public static class Global
 {
     public const string themeLink = "https://pixelgun.plus/~1031/pixelgun3d-config/menu/menu_all.txt";
     public const string prewievImageLink = "https://pixelgun.plus/~1031/Screenshots/";
+    //public const string newsLink = "https://pixelgun.plus/~1031/pixelgun3d-config/lobbyNews/LobbyNews_all.json";
     public const string versionLink = "https://pixelgun.plus/~1031/Downloads/version.txt";
     //public const string gameDownloadLink = "C:/Users/PC/Downloads/game.zip";
     public const string gameDownloadLink = "https://pixelgun.plus/download.php?id=10.3.1-win-game-x86_64";

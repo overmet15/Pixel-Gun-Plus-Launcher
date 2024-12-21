@@ -43,9 +43,11 @@ public class PreloadScreen : MonoBehaviour
 
         yield return StartCoroutine(GetPreviewImages());
         yield return StartCoroutine(GetCurrentVersion());
+        yield return StartCoroutine(GetCurrentVersionLauncher());
 
         yield return DownloadManager.CheckBuild();
 
+        //ToDo: Make option to skip unnecesary calls, or skip selected ones
         SceneManager.LoadScene("Launcher");
     }
 
@@ -101,6 +103,7 @@ public class PreloadScreen : MonoBehaviour
         }
         else Preload.GameVersion = Version.Parse(request.downloadHandler.text);
     }
+
     IEnumerator GetCurrentVersionLauncher()
     {
         UnityWebRequest request = UnityWebRequest.Get(Global.versionLink);

@@ -1,5 +1,5 @@
 using System;
-public class Version
+public class Version // Replace with actual semver class???
 {
     public int major;
     public int minor;

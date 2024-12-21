@@ -750,8 +750,8 @@ TextureImporter:
         serializedVersion: 2
         x: 142
         y: 66
-        width: 29
-        height: 51
+        width: 12
+        height: 15
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -770,13 +770,13 @@ TextureImporter:
       name: Atlas_10
       rect:
         serializedVersion: 2
-        x: 172
+        x: 155
         y: 66
-        width: 29
-        height: 51
+        width: 7
+        height: 10
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 3, y: 6, z: 3, w: 3}
       customData: 
       outline: []
       physicsShape: []
@@ -789,45 +789,45 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_11
+      name: Atlas_14
       rect:
         serializedVersion: 2
-        x: 202
-        y: 66
-        width: 16
-        height: 11
+        x: 313
+        y: 1
+        width: 18
+        height: 56
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 8, y: 8, z: 8, w: 8}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 942b454c76e209b4a9117caa91a2c399
-      internalID: -144115735
+      spriteID: c3774b8953100a941b699a39dd3df353
+      internalID: -1560865767
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_12
+      name: Atlas_11
       rect:
         serializedVersion: 2
-        x: 219
+        x: 163
         y: 66
-        width: 16
-        height: 11
+        width: 3
+        height: 3
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0, y: 0}
+      border: {x: 1, y: 1, z: 1, w: 1}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 522dd42dc6220344ea898e5c7eb7ffd0
-      internalID: 855150012
+      spriteID: bf00bc5ec7e25c546b6411c0f5bc82b6
+      internalID: -144115735
       vertices: []
       indices: 
       edges: []
@@ -851,6 +851,8 @@ TextureImporter:
       Atlas_10: -1796046230
       Atlas_11: -144115735
       Atlas_12: 855150012
+      Atlas_13: -1647871034
+      Atlas_14: -1560865767
       Atlas_2: 324526782
       Atlas_3: -776071507
       Atlas_4: 1897501389
