@@ -146,6 +146,7 @@ public class DownloadManager : MonoBehaviour
 
         File.Delete(Global.TempZipPath);
 
+        CheckBuild();
         animator.SetBool("UIEnabled", true);
     }
 }
