@@ -13,7 +13,7 @@ public class InfoText : MonoBehaviour
 
     void Update()
     {
-        if (!Application.isFocused || DownloadManager.currentDownloadState != DownloadState.notDownloading) return;
+        if (DownloadManager.currentDownloadState != DownloadState.notDownloading) return;
 
         if (Global.buildState == BuildState.unknownBuild)
         {
@@ -44,7 +44,6 @@ public class InfoText : MonoBehaviour
         {
             case DownloadState.inProcess: text.text = "Download in process, please wait.";  break;
             case DownloadState.finished: text.text = "Unpacking...";  break;
-            
         }
     }
 }

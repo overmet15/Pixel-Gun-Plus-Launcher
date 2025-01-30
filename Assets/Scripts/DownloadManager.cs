@@ -28,8 +28,6 @@ public class DownloadManager : MonoBehaviour
     {
         if (currentDownloadState != DownloadState.notDownloading) return;
 
-        Application.runInBackground = true; // make sure nothing breaks.
-
         playPanel.SetActive(false);
         downloadingPanel.SetActive(true);
 
@@ -112,7 +110,8 @@ public class DownloadManager : MonoBehaviour
         {
             Log(request.downloadedBytes.ToString());
             Task writeTask = fileStream.WriteAsync(request.downloadHandler.data, 0, request.downloadHandler.data.Length);
-            yield return new WaitUntil(() => writeTask.IsCompleted);
+            writeTask.Start();
+            while (!writeTask.IsCompleted) yield return null;
         }
 
         yield return new WaitForSecondsRealtime(0.15f);
