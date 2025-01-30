@@ -2,7 +2,9 @@ using UnityEngine;
 using System.Threading.Tasks;
 using System.IO;
 using System.Diagnostics;
-using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System;
 public static class Utils
 {
     public static Color ColorToUColor(int r, int g, int b, int a = 255)
@@ -11,7 +13,7 @@ public static class Utils
         return color;
     }
 
-    public static IEnumerator Unzip(string path, string destination)
+    public static Process Unzip(string path, string destination)
     {
         Process process = new();
 
@@ -19,10 +21,10 @@ public static class Utils
         process.StartInfo.Arguments = $"/C tar -xf {path} -C {destination}";
 
         process.StartInfo.CreateNoWindow = true;
-        process.StartInfo.UseShellExecute = true;
+        process.StartInfo.UseShellExecute = false;
 
         process.Start();
 
-        while (!process.HasExited) yield return null;
+        return process;
     }
 }

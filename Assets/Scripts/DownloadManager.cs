@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
+using System.Diagnostics;
 using System.IO;
-using System.IO.Compression;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
@@ -91,7 +91,7 @@ public class DownloadManager : MonoBehaviour
 
         if (request.result != UnityWebRequest.Result.Success)
         {
-            Debug.LogError(request.error);
+            LogError(request.error);
 
             animator.SetBool("UIEnabled", false);
 
@@ -108,22 +108,28 @@ public class DownloadManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f); // Let it play.
 
-        using (FileStream fileStream = new(Global.TempZipPath, FileMode.Create, FileAccess.Write, FileShare.None))
+        using (FileStream fileStream = new(Global.TempZipPath, FileMode.Create, FileAccess.Write, FileShare.Read))
         {
+            Log(request.downloadedBytes.ToString());
             yield return fileStream.WriteAsync(request.downloadHandler.data, 0, request.downloadHandler.data.Length);
+            yield return fileStream.DisposeAsync();
         }
 
-        yield return new WaitForSecondsRealtime(0.2f); // Small delay to ensure write completion.
+        yield return new WaitForSecondsRealtime(0.15f);
 
         if (!Directory.Exists(Global.GameFolderPath)) 
             Directory.CreateDirectory(Global.GameFolderPath);
 
-        yield return StartCoroutine(Utils.Unzip(Global.TempZipPath, Global.GameFolderPath));
+        Process unzipProgress = Utils.Unzip(Global.TempZipPath, Global.GameFolderPath);
+
+        while (!unzipProgress.HasExited) yield return null;
+
+        if (unzipProgress.ExitCode != 0) LogWarning($"Unzip process error: {unzipProgress.ExitCode}");
 
         currentDownloadState = DownloadState.notDownloading;
         onDownloadStatusChange.Invoke(DownloadState.notDownloading);
 
-        yield return File.WriteAllTextAsync(Global.GameVersionPath, Preload.GameVersion.ToString());
+        if (unzipProgress.ExitCode != 2) yield return File.WriteAllTextAsync(Global.GameVersionPath, Preload.GameVersion.ToString());
 
         downloadingPanel.SetActive(false);
         playPanel.SetActive(true);
@@ -132,9 +138,22 @@ public class DownloadManager : MonoBehaviour
 
         StartCoroutine(manager.Check(false));
 
-        //File.Delete(Global.TempZipPath);
+        File.Delete(Global.TempZipPath);
 
-        CheckBuild();
         animator.SetBool("UIEnabled", true);
+    }
+
+    static void Log(string log)
+    {
+        UnityEngine.Debug.Log(log);
+    }
+
+    static void LogWarning(string war)
+    {
+        UnityEngine.Debug.LogWarning(war);
+    }
+    static void LogError(string war)
+    {
+        UnityEngine.Debug.LogWarning(war);
     }
 }
