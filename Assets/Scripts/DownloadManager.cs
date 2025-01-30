@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using UnityEngine.VFX;
 
 public enum DownloadState { notDownloading, inProcess, finished }
 
@@ -117,7 +118,7 @@ public class DownloadManager : MonoBehaviour
         if (!Directory.Exists(Global.GameFolderPath)) 
             Directory.CreateDirectory(Global.GameFolderPath);
 
-        yield return CMDUtils.Unzip(Global.TempZipPath, Global.GameFolderPath);
+        yield return StartCoroutine(Utils.Unzip(Global.TempZipPath, Global.GameFolderPath));
 
         currentDownloadState = DownloadState.notDownloading;
         onDownloadStatusChange.Invoke(DownloadState.notDownloading);
