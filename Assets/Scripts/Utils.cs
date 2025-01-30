@@ -17,10 +17,10 @@ public static class Utils
     {
         Process process = new();
 
-        process.StartInfo.FileName = "cmd.exe";
-        process.StartInfo.Arguments = $"/C tar -xf {path} -C {destination}";
+        process.StartInfo.FileName = "C:/Windows/System32/tar.exe";
+        process.StartInfo.Arguments = $"-xf \"{path}\" -C \"{destination}\"";
 
-        process.StartInfo.CreateNoWindow = true;
+        process.StartInfo.CreateNoWindow = false;
         process.StartInfo.UseShellExecute = false;
 
         process.Start();
