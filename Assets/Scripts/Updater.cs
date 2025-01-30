@@ -6,6 +6,7 @@ public static class Updater
 {
     public static void Update(string launcherFolder, string zipFolder)
     {
+        return;
         Process process = new Process();
 
         process.StartInfo.FileName = "cmd.exe";

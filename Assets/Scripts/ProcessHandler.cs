@@ -20,7 +20,6 @@ public static class ProcessHandler
             EnableRaisingEvents = true // Enable Exited event
         };
 
-        process.Exited += OnProcessEnd;
         try
         {
             process.Start();
@@ -32,23 +31,11 @@ public static class ProcessHandler
         }
         finally
         {
-            if (PrefsManager.closeOnGameStart) Application.Quit();
+            Application.Quit();
 
             unaviableScreen.SetActive(true);
             mainScreen.SetActive(false);
             backgrnd.SetActive(false);
         }
-    }
-
-    public static void OnProcessEnd(object sender, EventArgs e)
-    {
-        unaviableScreen.SetActive(false);
-
-        UnityEngine.Debug.Log("The monitored process has exited.");
-        
-        process.Exited -= OnProcessEnd;
-        process.Dispose();
-
-        SceneManager.LoadScene("Launcher");
     }
 }

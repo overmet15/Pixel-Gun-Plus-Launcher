@@ -107,15 +107,9 @@ public class DownloadManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f); // Let it play.
 
-        using (FileStream fileStream = new FileStream(Global.TempZipPath, FileMode.Create, FileAccess.Write, FileShare.None))
+        using (FileStream fileStream = new(Global.TempZipPath, FileMode.Create, FileAccess.Write, FileShare.None))
         {
-            var writeTask = Task.Run(async () => 
-            {
-                await fileStream.WriteAsync(request.downloadHandler.data, 0, request.downloadHandler.data.Length);
-            });
-
-            // Wait until the task completes.
-            yield return new WaitUntil(() => writeTask.IsCompleted);
+            yield return fileStream.WriteAsync(request.downloadHandler.data, 0, request.downloadHandler.data.Length);
         }
 
         yield return new WaitForSecondsRealtime(0.2f); // Small delay to ensure write completion.
@@ -123,14 +117,7 @@ public class DownloadManager : MonoBehaviour
         if (!Directory.Exists(Global.GameFolderPath)) 
             Directory.CreateDirectory(Global.GameFolderPath);
 
-        try
-        {
-            ZipFile.ExtractToDirectory(Global.TempZipPath, Global.GameFolderPath, true);
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError($"Error extracting zip: {ex.Message}");
-        }
+        yield return CMDUtils.Unzip(Global.TempZipPath, Global.GameFolderPath);
 
         currentDownloadState = DownloadState.notDownloading;
         onDownloadStatusChange.Invoke(DownloadState.notDownloading);
@@ -144,7 +131,7 @@ public class DownloadManager : MonoBehaviour
 
         StartCoroutine(manager.Check(false));
 
-        File.Delete(Global.TempZipPath);
+        //File.Delete(Global.TempZipPath);
 
         CheckBuild();
         animator.SetBool("UIEnabled", true);
