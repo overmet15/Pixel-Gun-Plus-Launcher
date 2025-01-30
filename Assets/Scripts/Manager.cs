@@ -1,12 +1,10 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
-using System.Text.RegularExpressions;
 
 public class Manager : MonoBehaviour
 {
 
-    [SerializeField] private Text mainText, verText;
+    [SerializeField] private UILabel mainText, verText;
     [SerializeField] private GameObject main, downloading, mainScreen, background;
     [SerializeField] private Animator canvasAnimator;
     [SerializeField] private DownloadManager downloadManager;
@@ -38,10 +36,10 @@ public class Manager : MonoBehaviour
 
         switch (Global.buildState)
         {
-            case BuildState.noBuild: mainText.text = "Download"; break;
-            case BuildState.unknownBuild: verText.text = "Unknown Build"; mainText.text = "Play"; break;
-            case BuildState.updateNeeded: mainText.text = "Update"; break;
-            case BuildState.upToDate: mainText.text = "Play"; break;
+            case BuildState.noBuild: mainText.text = "DOWNLOAD"; break;
+            case BuildState.unknownBuild: verText.text = "UNKNOWN VERSION"; mainText.text = "PLAY"; break;
+            case BuildState.updateNeeded: mainText.text = "UPDATE"; break;
+            case BuildState.upToDate: mainText.text = "PLAY"; break;
         }
 
         if (playAnim)
@@ -52,7 +50,7 @@ public class Manager : MonoBehaviour
         }
     }
 
-    // UGUI things
+    // UGUI, WRONG!!! NGUI! things
     public void OnMainButton()
     {
         if (Global.buildState == BuildState.upToDate || Global.buildState == BuildState.unknownBuild) 
@@ -80,5 +78,15 @@ public class Manager : MonoBehaviour
     public void OnSettingsButton()
     {
         canvasAnimator.SetTrigger("Options");
+    }
+
+    public void OnQuitButton()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.ExitPlaymode();
+#else
+        Application.Quit();
+#endif
+        //Application.CommitSuicide();
     }
 }

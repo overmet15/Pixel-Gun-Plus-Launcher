@@ -15,8 +15,8 @@ public enum DownloadState { notDownloading, inProcess, finished }
 public class DownloadManager : MonoBehaviour
 {
     [SerializeField] private GameObject playPanel, downloadingPanel;
-    [SerializeField] private Slider progressSlider;
-    [SerializeField] private Text downloadingText, procentText;
+    [SerializeField] private UISlider progressSlider;
+    [SerializeField] private UILabel downloadingText, procentText, progressText;
     [SerializeField] private Animator animator;
 
     [SerializeField] private Manager manager;
@@ -32,11 +32,10 @@ public class DownloadManager : MonoBehaviour
         playPanel.SetActive(false);
         downloadingPanel.SetActive(true);
 
-        progressSlider.maxValue = 1;
         progressSlider.value = 0;
 
         //downloadingText.text = $"Downloading {Preload.GameVersion}"; - Disabled due being broken in builds
-        downloadingText.text = $"Downloading...";
+        downloadingText.text = $"DOWNLOADING";
         procentText.text = "0%";
 
         currentDownloadState = DownloadState.inProcess;
@@ -84,9 +83,13 @@ public class DownloadManager : MonoBehaviour
 
         while (!request.isDone)
         {
+            string sizeString = request.GetResponseHeader("Content-Length");
+            long size = Convert.ToInt64(sizeString) / 1024 / 1024;
+            float bytesDownloaded = request.downloadedBytes / 1024f / 1024f;
+            bytesDownloaded = Mathf.Round(bytesDownloaded * 10f) * 0.1f;
             procentText.text = (request.downloadProgress * 100).ToString("F1") + "%";
-
             progressSlider.value = request.downloadProgress;
+            progressText.text = bytesDownloaded.ToString() + " MB/" + (size ) + " MB";
 
             yield return null;
         }

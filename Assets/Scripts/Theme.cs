@@ -6,6 +6,6 @@ public class Theme : ScriptableObject
     public Color topBarColor;
     public Color progressBarColor;
 
-    public Sprite backgroundSprite;
-    public Sprite logoSprite;
+    public Texture2D backgroundImage;
+    public Texture2D logoImage;
 }

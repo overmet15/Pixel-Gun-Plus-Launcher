@@ -1,14 +1,14 @@
-using UnityEngine.UI;
 using UnityEngine;
 
 public class AfterPreload : MonoBehaviour
 {
-    [SerializeField] private Image backgroundImage, topImage, progressImage, logoImage, logoImage2;
+    [SerializeField] private UITexture backgroundImage, logoImage, logoImage2;
+    [SerializeField] private UISprite progressBar, topBar;
     public void Awake()
     {
-        logoImage.sprite = logoImage2.sprite = Preload.currentThemeObject.logoSprite;
-        backgroundImage.sprite = Preload.currentThemeObject.backgroundSprite;
-        topImage.color = Preload.currentThemeObject.topBarColor;
-        progressImage.color = Preload.currentThemeObject.progressBarColor;
+        logoImage.mainTexture = logoImage2.mainTexture = Preload.currentThemeObject.logoImage;
+        backgroundImage.mainTexture = Preload.currentThemeObject.backgroundImage;
+        topBar.color = Preload.currentThemeObject.topBarColor;
+        progressBar.color = Preload.currentThemeObject.progressBarColor;
     }
 }

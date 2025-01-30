@@ -48,7 +48,7 @@ public class PreloadScreen : MonoBehaviour
         yield return DownloadManager.CheckBuild();
 
         //ToDo: Make option to skip unnecesary calls, or skip selected ones
-        SceneManager.LoadScene("Launcher");
+        SceneManager.LoadScene("LauncherNew");
     }
 
     IEnumerator GetCurrentTheme()
