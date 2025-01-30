@@ -4,7 +4,6 @@ using UnityEngine.UI;
 public class InfoText : MonoBehaviour
 {
     [SerializeField] private Text text;
-    [SerializeField] private Clickable clickable;
     [SerializeField] private DownloadManager downloadManager;
 
     void Start()
@@ -25,8 +24,6 @@ public class InfoText : MonoBehaviour
             text.text = "Click here to download latest launcher update.";
         }
         else text.text = string.Empty;
-
-        clickable.enabled = ClickableShouldBeEnabled();
     }
 
     public void OnClick()
@@ -49,10 +46,5 @@ public class InfoText : MonoBehaviour
             case DownloadState.finished: text.text = "Unpacking...";  break;
             
         }
-    }
-
-    bool ClickableShouldBeEnabled()
-    {
-        return (Global.buildState == BuildState.unknownBuild || Preload.newVersionAviable) && DownloadManager.currentDownloadState == DownloadState.notDownloading;
     }
 }
