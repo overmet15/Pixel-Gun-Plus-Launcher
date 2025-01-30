@@ -111,8 +111,8 @@ public class DownloadManager : MonoBehaviour
         using (FileStream fileStream = new(Global.TempZipPath, FileMode.Create, FileAccess.Write, FileShare.Read))
         {
             Log(request.downloadedBytes.ToString());
-            yield return fileStream.WriteAsync(request.downloadHandler.data, 0, request.downloadHandler.data.Length);
-            yield return fileStream.DisposeAsync();
+            Task writeTask = fileStream.WriteAsync(request.downloadHandler.data, 0, request.downloadHandler.data.Length);
+            yield return new WaitUntil(() => writeTask.IsCompleted);
         }
 
         yield return new WaitForSecondsRealtime(0.15f);
