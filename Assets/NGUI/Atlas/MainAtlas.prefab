@@ -59,6 +59,19 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: complaint_cell
+    x: 28
+    y: 12
+    width: 7
+    height: 10
+    borderLeft: 3
+    borderRight: 3
+    borderTop: 3
+    borderBottom: 6
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: credits
     x: 0
     y: 3
@@ -73,8 +86,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: disc_btn
-    x: 386
-    y: 70
+    x: 438
+    y: 62
     width: 25
     height: 64
     borderLeft: 12
@@ -86,8 +99,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: disc_btn_n
-    x: 412
-    y: 70
+    x: 464
+    y: 62
     width: 25
     height: 64
     borderLeft: 12
@@ -151,8 +164,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 11
   - name: green_btn
-    x: 464
-    y: 62
+    x: 386
+    y: 70
     width: 25
     height: 64
     borderLeft: 12
@@ -164,19 +177,6 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: green_btn_n
-    x: 334
-    y: 130
-    width: 25
-    height: 64
-    borderLeft: 12
-    borderRight: 12
-    borderTop: 12
-    borderBottom: 12
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: grey_button
     x: 360
     y: 130
     width: 25
@@ -189,8 +189,21 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: grey_button
+    x: 412
+    y: 70
+    width: 25
+    height: 64
+    borderLeft: 12
+    borderRight: 12
+    borderTop: 12
+    borderBottom: 12
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: grey_button_n
-    x: 282
+    x: 308
     y: 130
     width: 25
     height: 64
@@ -255,6 +268,19 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: or_btn
+    x: 465
+    y: 192
+    width: 25
+    height: 64
+    borderLeft: 12
+    borderRight: 12
+    borderTop: 12
+    borderBottom: 12
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: or_btn_n
     x: 256
     y: 130
     width: 25
@@ -267,33 +293,7 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: or_btn_n
-    x: 308
-    y: 130
-    width: 25
-    height: 64
-    borderLeft: 12
-    borderRight: 12
-    borderTop: 12
-    borderBottom: 12
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
   - name: or_btn_n_top
-    x: 491
-    y: 192
-    width: 19
-    height: 64
-    borderLeft: 12
-    borderRight: 6
-    borderTop: 12
-    borderBottom: 12
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: or_btn_top
     x: 490
     y: 62
     width: 19
@@ -306,8 +306,21 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: or_btn_top
+    x: 491
+    y: 192
+    width: 19
+    height: 64
+    borderLeft: 12
+    borderRight: 6
+    borderTop: 12
+    borderBottom: 12
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: red_btn
-    x: 440
+    x: 466
     y: 127
     width: 25
     height: 64
@@ -320,8 +333,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: red_btn_n
-    x: 414
-    y: 135
+    x: 440
+    y: 127
     width: 25
     height: 64
     borderLeft: 12
@@ -333,7 +346,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: red_btn_n_top
-    x: 0
+    x: 24
     y: 74
     width: 23
     height: 64
@@ -346,7 +359,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: red_btn_top
-    x: 24
+    x: 0
     y: 74
     width: 23
     height: 64
@@ -437,7 +450,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: white_btn
-    x: 388
+    x: 414
     y: 135
     width: 25
     height: 64
@@ -450,8 +463,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: white_btn_n
-    x: 465
-    y: 192
+    x: 388
+    y: 135
     width: 25
     height: 64
     borderLeft: 12
@@ -476,8 +489,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: yell_btn
-    x: 466
-    y: 127
+    x: 282
+    y: 130
     width: 25
     height: 64
     borderLeft: 12
@@ -489,8 +502,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: yell_btn_n
-    x: 438
-    y: 62
+    x: 334
+    y: 130
     width: 25
     height: 64
     borderLeft: 12

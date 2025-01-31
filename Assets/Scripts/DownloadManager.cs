@@ -13,7 +13,7 @@ public class DownloadManager : MonoBehaviour
 {
     [SerializeField] private GameObject playPanel, downloadingPanel;
     [SerializeField] private UISlider progressSlider;
-    [SerializeField] private UILabel downloadingText, procentText, progressText;
+    [SerializeField] private UILabel downloadingText, procentText, progressText, speedText;
     [SerializeField] private Animator animator;
 
     [SerializeField] private Manager manager;
@@ -32,7 +32,8 @@ public class DownloadManager : MonoBehaviour
         progressSlider.value = 0;
 
         //downloadingText.text = $"Downloading {Preload.GameVersion}"; - Disabled due being broken in builds
-        downloadingText.text = $"DOWNLOADING";
+        manager.verText.text = string.Empty;
+        downloadingText.text = "DOWNLOADING " + Preload.GameVersion;
         procentText.text = "0%";
 
         currentDownloadState = DownloadState.inProcess;
@@ -69,6 +70,13 @@ public class DownloadManager : MonoBehaviour
         else Global.buildState = BuildState.unknownBuild;
     }
 
+    void CheckDownloadSpeed(double downloadedBytes, DateTime startTime)
+    {
+        double speed = downloadedBytes / 1024f / 1024f / (DateTime.Now - startTime).TotalSeconds;
+        speed = Math.Round(speed * 10) * 0.1;
+        speedText.text = speed + " MB/s";
+    }
+
     IEnumerator DownloadGame()
     {
         // check if there is build
@@ -76,18 +84,27 @@ public class DownloadManager : MonoBehaviour
 
         UnityWebRequest request = UnityWebRequest.Get(Global.gameDownloadLink);
 
+        DateTime startTime = DateTime.Now;
+        float checkSpeedTimer = 0f;
+
         request.SendWebRequest();
 
         while (!request.isDone)
         {
             string sizeString = request.GetResponseHeader("Content-Length");
             long size = Convert.ToInt64(sizeString) / 1024 / 1024;
-            float bytesDownloaded = request.downloadedBytes / 1024f / 1024f;
-            bytesDownloaded = Mathf.Round(bytesDownloaded * 10f) * 0.1f;
+            double bytesDownloaded = request.downloadedBytes / 1024f / 1024f;
+            bytesDownloaded = Math.Round(bytesDownloaded * 10) * 0.1;
             procentText.text = (request.downloadProgress * 100).ToString("F1") + "%";
             progressSlider.value = request.downloadProgress;
-            progressText.text = bytesDownloaded.ToString() + " MB/" + (size ) + " MB";
+            progressText.text = bytesDownloaded.ToString() + " MB/" + size + " MB";
 
+            checkSpeedTimer += Time.deltaTime;
+            if (checkSpeedTimer >= 0.75f)
+            {
+                CheckDownloadSpeed(request.downloadedBytes, startTime);
+                checkSpeedTimer = 0f;
+            }
             yield return null;
         }
 

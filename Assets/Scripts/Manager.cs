@@ -4,13 +4,17 @@ using System.Collections;
 public class Manager : MonoBehaviour
 {
 
-    [SerializeField] private UILabel mainText, verText;
-    [SerializeField] private GameObject main, downloading, mainScreen, background;
+    [SerializeField] private UILabel mainText;
+    public UILabel verText;
+    [SerializeField] private GameObject main, downloading, mainScreen, background, outdated;
     [SerializeField] private DownloadManager downloadManager;
+    [SerializeField] private LauncherUI ui;
 
     public GameObject unaviableScreen;
 
     public bool downloadingGame;
+
+    private bool newsOpen, creditsOpen, settingsOpen;
 
     private void Start()
     {
@@ -19,7 +23,7 @@ public class Manager : MonoBehaviour
 
     public void Check(bool playAnim)
     {
-        verText.text = string.Empty;
+        verText.text = "NOT INSTALLED";
 
         downloading.SetActive(false);
         main.SetActive(true);
@@ -30,7 +34,7 @@ public class Manager : MonoBehaviour
         {
             case BuildState.noBuild: mainText.text = "DOWNLOAD"; break;
             case BuildState.unknownBuild: verText.text = "UNKNOWN VERSION"; mainText.text = "PLAY"; break;
-            case BuildState.updateNeeded: mainText.text = "UPDATE"; break;
+            case BuildState.updateNeeded: outdated.SetActive(true); mainText.text = "UPDATE"; break;
             case BuildState.upToDate: mainText.text = "PLAY"; break;
         }
     }
@@ -55,6 +59,16 @@ public class Manager : MonoBehaviour
 
     public void OnCreditsButton()
     {
+        ui.creditsPanel.SetActive(!ui.creditsPanel.activeSelf);
+        ui.newsPanel.SetActive(false);
+        //ui.settingsPanel.SetActive(false);
+    }
+
+    public void OnNewsButton()
+    {
+        ui.newsPanel.SetActive(!ui.newsPanel.activeSelf);
+        ui.creditsPanel.SetActive(false);
+        //ui.settingsPanel.SetActive(false);
     }
 
     public void OnSettingsButton()
