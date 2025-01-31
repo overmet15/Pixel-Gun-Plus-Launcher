@@ -1343,8 +1343,8 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 58
-  mHeight: 58
+  mWidth: 60
+  mHeight: 60
   mDepth: 3
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
@@ -1799,14 +1799,14 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 304
+  mWidth: 300
   mHeight: 75
   mDepth: 20
   mMat: {fileID: 0}
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 4.0533333
+  aspectRatio: 4
   mType: 1
   mFillDirection: 4
   mFillAmount: 1
@@ -1872,7 +1872,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 304, y: 75, z: 0}
+  m_Size: {x: 300, y: 75, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &749728410
 GameObject:
