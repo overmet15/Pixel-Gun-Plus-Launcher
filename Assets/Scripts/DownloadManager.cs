@@ -1,14 +1,11 @@
 using System;
 using System.Collections;
-using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Networking;
-using UnityEngine.UI;
-using UnityEngine.VFX;
 
 public enum DownloadState { notDownloading, inProcess, finished }
 
@@ -96,7 +93,7 @@ public class DownloadManager : MonoBehaviour
 
         if (request.result != UnityWebRequest.Result.Success)
         {
-            LogError(request.error);
+            Debug.LogError(request.error);
 
             animator.SetBool("UIEnabled", false);
 
@@ -113,8 +110,12 @@ public class DownloadManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f); // Let it play.
 
-        var writeTask = File.WriteAllBytesAsync(Global.TempZipPath, request.downloadHandler.data);
-        yield return new WaitUntil(() => writeTask.IsCompleted);
+        using (FileStream fileStream = File.Create(Global.TempZipPath))
+        {
+            var writeTask = fileStream.WriteAsync(request.downloadHandler.data, 0, request.downloadHandler.data.Length);
+            yield return new WaitUntil(() => writeTask.IsCompleted);
+            Debug.Log(writeTask.IsCompleted);
+        }
 
         yield return new WaitForSecondsRealtime(1.15f);
 
@@ -129,7 +130,7 @@ public class DownloadManager : MonoBehaviour
         }
         catch (Exception ex)
         {
-            LogError($"Error extracting zip: {ex.Message}");
+            Debug.LogError($"Error extracting zip: {ex.Message}");
         }
 
         currentDownloadState = DownloadState.notDownloading;
@@ -147,20 +148,5 @@ public class DownloadManager : MonoBehaviour
         File.Delete(Global.TempZipPath);
 
         animator.SetBool("UIEnabled", true);
-    }
-
-    static void Log(string log)
-    {
-        UnityEngine.Debug.Log(log);
-    }
-
-    static void LogWarning(string war)
-    {
-        UnityEngine.Debug.LogWarning(war);
-    }
-
-    static void LogError(string war)
-    {
-        UnityEngine.Debug.LogWarning(war);
     }
 }

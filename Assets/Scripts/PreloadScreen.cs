@@ -35,7 +35,6 @@ public class PreloadScreen : MonoBehaviour
         
         if (!ThemeCheck())
         {
-            Error("Invalid Theme.", $"Invalid Theme: {Preload.currentTheme}");
             Preload.currentTheme = "Menu_Colapsed_City";
         }
 
@@ -80,7 +79,7 @@ public class PreloadScreen : MonoBehaviour
                 sprites.Add(Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f)));
             }
         }
-        Preload.previewImages = sprites.Count != 0 ? sprites : null;*/        
+        Preload.previewImages = sprites.Count != 0 ? sprites : null;*/
         UnityWebRequest request = UnityWebRequestTexture.GetTexture(Global.prewievImageLink + Random.Range(1, 3));
         yield return request.SendWebRequest();
         if (request.result == UnityWebRequest.Result.Success)
