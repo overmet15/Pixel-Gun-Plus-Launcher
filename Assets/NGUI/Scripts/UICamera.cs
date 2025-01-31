@@ -1661,7 +1661,8 @@ public class UICamera : MonoBehaviour
 					var hitCount = mOverlap.Length;
 #else
 					if (mOverlap == null) mOverlap = new Collider2D[50];
-					var hitCount = Physics2D.OverlapPointNonAlloc(lastWorldPosition, mOverlap, mask);
+					var hitCount = Physics2D.OverlapPoint(lastWorldPosition, 
+						new ContactFilter2D() { layerMask = mask }, mOverlap);
 #endif
 					if (hitCount > 1)
 					{

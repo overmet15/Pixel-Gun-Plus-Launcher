@@ -104,7 +104,7 @@ static public class NGUITools
 		{
 			if (mListener == null || !NGUITools.GetActive(mListener))
 			{
-				AudioListener[] listeners = GameObject.FindObjectsOfType(typeof(AudioListener)) as AudioListener[];
+				AudioListener[] listeners = UnityEngine.Object.FindObjectsByType<AudioListener>(FindObjectsSortMode.None);
 
 				if (listeners != null)
 				{
@@ -121,7 +121,7 @@ static public class NGUITools
 				if (mListener == null)
 				{
 					Camera cam = Camera.main;
-					if (cam == null) cam = GameObject.FindObjectOfType(typeof(Camera)) as Camera;
+					if (cam == null) cam = UnityEngine.Object.FindAnyObjectByType<Camera>();
 					if (cam != null) mListener = cam.gameObject.AddComponent<AudioListener>();
 				}
 			}
@@ -219,7 +219,7 @@ static public class NGUITools
 
 	static public T[] FindActive<T> () where T : Component
 	{
-		return GameObject.FindObjectsOfType(typeof(T)) as T[];
+		return UnityEngine.Object.FindObjectsByType<T>(FindObjectsSortMode.None);
 	}
 
 	/// <summary>
@@ -1226,7 +1226,7 @@ static public class NGUITools
 
 	static public void Broadcast (string funcName)
 	{
-		GameObject[] gos = GameObject.FindObjectsOfType(typeof(GameObject)) as GameObject[];
+		GameObject[] gos = UnityEngine.Object.FindObjectsByType<GameObject>(FindObjectsSortMode.None);
 		for (int i = 0, imax = gos.Length; i < imax; ++i) gos[i].SendMessage(funcName, SendMessageOptions.DontRequireReceiver);
 	}
 
@@ -1236,7 +1236,7 @@ static public class NGUITools
 
 	static public void Broadcast (string funcName, object param)
 	{
-		GameObject[] gos = GameObject.FindObjectsOfType(typeof(GameObject)) as GameObject[];
+		GameObject[] gos = UnityEngine.Object.FindObjectsByType<GameObject>(FindObjectsSortMode.None);
 		for (int i = 0, imax = gos.Length; i < imax; ++i) gos[i].SendMessage(funcName, param, SendMessageOptions.DontRequireReceiver);
 	}
 
