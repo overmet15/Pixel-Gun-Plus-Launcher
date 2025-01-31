@@ -11,7 +11,8 @@ public class WindowScript : MonoBehaviour//, IDragHandler
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && Input.mousePosition.y > Screen.height - 100) isDown = true;
+        if (Input.GetMouseButtonDown(0) && Input.mousePosition.y > Screen.height - 60 
+            && Input.mousePosition.x < Screen.width - 100) isDown = true;
 
         if (isDown)
             BorderlessWindow.MoveWindowPos(Input.mousePositionDelta * 1.8f, Screen.width, Screen.height);
