@@ -6,28 +6,20 @@ public class Manager : MonoBehaviour
 
     [SerializeField] private UILabel mainText, verText;
     [SerializeField] private GameObject main, downloading, mainScreen, background;
-    [SerializeField] private Animator canvasAnimator;
     [SerializeField] private DownloadManager downloadManager;
 
     public GameObject unaviableScreen;
 
     public bool downloadingGame;
 
-    private string verDisp, playDisp; // temporary fix, something else is setting text for no reason.
     private void Start()
     {
-        canvasAnimator.SetBool("UIEnabled", true);
-        StartCoroutine(Check(true));
+        Check(true);
     }
 
-    public IEnumerator Check(bool playAnim)
+    public void Check(bool playAnim)
     {
-        yield return null;
-
         verText.text = string.Empty;
-        ProcessHandler.unaviableScreen = unaviableScreen;
-        ProcessHandler.mainScreen = mainScreen;
-        ProcessHandler.backgrnd = background;
 
         downloading.SetActive(false);
         main.SetActive(true);
@@ -40,13 +32,6 @@ public class Manager : MonoBehaviour
             case BuildState.unknownBuild: verText.text = "UNKNOWN VERSION"; mainText.text = "PLAY"; break;
             case BuildState.updateNeeded: mainText.text = "UPDATE"; break;
             case BuildState.upToDate: mainText.text = "PLAY"; break;
-        }
-
-        if (playAnim)
-        {
-            yield return new WaitForSeconds(1f); // finish anim
-
-            canvasAnimator.SetTrigger("C");
         }
     }
 
@@ -65,19 +50,15 @@ public class Manager : MonoBehaviour
         yield return DownloadManager.CheckBuild();
 
         if (Global.buildState == BuildState.upToDate || Global.buildState == BuildState.unknownBuild) ProcessHandler.StartMonitoringProcess();
-        else
-        {
-            StartCoroutine(Check(false));
-        }
+        else Check(false);
     }
+
     public void OnCreditsButton()
     {
-        canvasAnimator.SetTrigger("Credits");
     }
 
     public void OnSettingsButton()
     {
-        canvasAnimator.SetTrigger("Options");
     }
 
     public void OnQuitButton()
@@ -88,5 +69,10 @@ public class Manager : MonoBehaviour
         Application.Quit();
 #endif
         //Application.CommitSuicide();
+    }
+
+    public void OnMinimizeButton()
+    {
+        BorderlessWindow.MinimizeWindow();
     }
 }

@@ -10,9 +10,6 @@ public class PreloadScreen : MonoBehaviour
     [SerializeField] private Text loadingText;
     IEnumerator Start()
     {
-        //Localization.Init();
-        Updater.Update("", "");
-
         string[] args = System.Environment.GetCommandLineArgs();
         //string[] args = new string[1]{"-theme=Menu_Christmas"};
 
@@ -105,6 +102,7 @@ public class PreloadScreen : MonoBehaviour
 
     IEnumerator GetCurrentVersionLauncher()
     {
+        Chache.Texture(Global.versionLink);
         UnityWebRequest request = UnityWebRequest.Get(Global.versionLink);
 
         yield return request.SendWebRequest();

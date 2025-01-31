@@ -143,7 +143,7 @@ public class DownloadManager : MonoBehaviour
 
         yield return CheckBuild();
 
-        StartCoroutine(manager.Check(false));
+        manager.Check(false);
 
         File.Delete(Global.TempZipPath);
 
