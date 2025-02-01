@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -7,7 +8,7 @@ public static class Preload
 {
     public static Theme currentTheme;
 
-    public static Sprite previewImage;
+    public static Texture2D[] previewImages;
 
     public static Version GameVersion;
 

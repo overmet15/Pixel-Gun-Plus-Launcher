@@ -9,13 +9,12 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
-/[Tt]emp.zip
 
-# Unity 6 preiview temp folder
+# Unity 6 preview temp folder
 /.utmp/
 
-# Launcher Game folder created when testing in unity
-/[Gg]ame/
+# Launcher folder created when testing in unity
+/_[Rr]untime/
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data

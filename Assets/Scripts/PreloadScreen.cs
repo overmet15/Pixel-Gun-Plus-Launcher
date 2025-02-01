@@ -47,6 +47,7 @@ public class PreloadScreen : MonoBehaviour
 
     IEnumerator GetPreviewImages()
     {
+        //Chache.ChacheTextures();
         /*List<Sprite> sprites = new();
 
         for (int i = 1; i <= 3; i++)
@@ -61,13 +62,19 @@ public class PreloadScreen : MonoBehaviour
             }
         }
         Preload.previewImages = sprites.Count != 0 ? sprites : null;*/
-        UnityWebRequest request = UnityWebRequestTexture.GetTexture(Global.prewievImageLink + Random.Range(1, 3));
+        UnityWebRequest request = UnityWebRequest.Get(Global.previewImagesCountLink);
         yield return request.SendWebRequest();
-        if (request.result == UnityWebRequest.Result.Success)
+        if (request.result != UnityWebRequest.Result.Success)
         {
-            Texture2D texture = DownloadHandlerTexture.GetContent(request);
-            Preload.previewImage = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+            Error("Couldn't Get Preview Image Count");
+            var taskErr = Chache.ChachePreviewImages(0);
+            yield return new WaitUntil(() => taskErr.IsCompleted);
+
+            yield break;
         }
+
+        var task = Chache.ChachePreviewImages(int.Parse(request.downloadHandler.text));
+        yield return new WaitUntil(() => task.IsCompleted);
     }
 
     IEnumerator GetCurrentVersion()
@@ -106,5 +113,9 @@ public class PreloadScreen : MonoBehaviour
         loadingAnimator.enabled = false;
         loadingText.text = error;
         loadingText.color = Utils.ColorToUColor(255, 0, 0);
+    }
+    void Error(string error)
+    {
+        Error(error, error);
     }
 }
