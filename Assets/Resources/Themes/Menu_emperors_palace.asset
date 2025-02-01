@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb3d7b2660badc84baeb5bedf0828c57, type: 3}
+  m_Name: Menu_emperors_palace
+  m_EditorClassIdentifier: 
+  topBarColor: {r: 0.9254902, g: 0.18039216, b: 0.21176471, a: 0.50980395}
+  progressBarColor: {r: 0.9254902, g: 0.18039216, b: 0.21176471, a: 0.9411765}
+  backgroundImage: {fileID: 2800000, guid: 3ae3d8a3ce5513f499dd6b6da33f0519, type: 3}
+  logoImage: {fileID: 2800000, guid: 0229fd4f1eaa24d42a6aed43fbddd94f, type: 3}

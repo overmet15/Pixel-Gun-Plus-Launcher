@@ -7,6 +7,7 @@ using System;
 public class NewsController : MonoBehaviour
 {
     [SerializeField] private UIGrid spawnItemsIn;
+    [SerializeField] private UIScrollView scrollView;
     [SerializeField] private GameObject ogItem;
 
     IEnumerator Start()
@@ -52,6 +53,7 @@ public class NewsController : MonoBehaviour
                 obj.data = data;
                 obj.UpdateDisplay();
                 spawnItemsIn.Reposition();
+                scrollView.ResetPosition();
             }
         }
         catch

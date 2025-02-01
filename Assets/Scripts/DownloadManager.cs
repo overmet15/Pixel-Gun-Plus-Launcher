@@ -14,8 +14,6 @@ public class DownloadManager : MonoBehaviour
     [SerializeField] private GameObject playPanel, downloadingPanel;
     [SerializeField] private UISlider progressSlider;
     [SerializeField] private UILabel downloadingText, procentText, progressText, speedText;
-    [SerializeField] private Animator animator;
-
     [SerializeField] private Manager manager;
 
     public static DownloadState currentDownloadState;
@@ -31,7 +29,6 @@ public class DownloadManager : MonoBehaviour
 
         progressSlider.value = 0;
 
-        //downloadingText.text = $"Downloading {Preload.GameVersion}"; - Disabled due being broken in builds
         manager.verText.text = string.Empty;
         downloadingText.text = "DOWNLOADING " + Preload.GameVersion;
         procentText.text = "0%";
@@ -112,8 +109,6 @@ public class DownloadManager : MonoBehaviour
         {
             Debug.LogError(request.error);
 
-            animator.SetBool("UIEnabled", false);
-
             yield return new WaitForSecondsRealtime(2);
 
             Application.Quit();
@@ -122,8 +117,6 @@ public class DownloadManager : MonoBehaviour
 
         currentDownloadState = DownloadState.finished;
         onDownloadStatusChange.Invoke(DownloadState.finished);
-
-        animator.SetBool("UIEnabled", false);
 
         yield return new WaitForSeconds(0.5f); // Let it play.
 
@@ -163,7 +156,5 @@ public class DownloadManager : MonoBehaviour
         manager.Check(false);
 
         File.Delete(Global.TempZipPath);
-
-        animator.SetBool("UIEnabled", true);
     }
 }

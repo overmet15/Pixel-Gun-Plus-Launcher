@@ -233,7 +233,7 @@ Transform:
   m_GameObject: {fileID: 56646812}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -190, y: 27, z: 0}
+  m_LocalPosition: {x: -112, y: 27, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -270,7 +270,7 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 0.92941177, b: 0, a: 1}
   mPivot: 3
-  mWidth: 302
+  mWidth: 224
   mHeight: 24
   mDepth: 45
   mMat: {fileID: 0}
@@ -1217,7 +1217,7 @@ MonoBehaviour:
   pivot: 0
   maxPerLine: 0
   cellWidth: 432
-  cellHeight: 130
+  cellHeight: 110
   animateSmoothly: 0
   hideInactive: 0
   keepWithinPanel: 0
@@ -1408,6 +1408,7 @@ GameObject:
   - component: {fileID: 529579948}
   - component: {fileID: 529579947}
   - component: {fileID: 529579950}
+  - component: {fileID: 529579951}
   m_Layer: 5
   m_Name: NewsItem
   m_TagString: Untagged
@@ -1423,8 +1424,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 529579945}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -350, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -232, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1563,6 +1564,20 @@ MonoBehaviour:
   header: {fileID: 56646814}
   shortDesc: {fileID: 842723360}
   date: {fileID: 1552712114}
+--- !u!114 &529579951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529579945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43c1c3790877f5743b48daf1df857c2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollView: {fileID: 1784506783}
+  draggablePanel: {fileID: 0}
 --- !u!1 &538908135
 GameObject:
   m_ObjectHideFlags: 0
@@ -2380,7 +2395,7 @@ Transform:
   m_GameObject: {fileID: 842723358}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -22, y: -14, z: 0}
+  m_LocalPosition: {x: 17, y: -14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2417,7 +2432,7 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 336
+  mWidth: 258
   mHeight: 54
   mDepth: 45
   mMat: {fileID: 0}
@@ -3278,7 +3293,6 @@ MonoBehaviour:
   procentText: {fileID: 712109124}
   progressText: {fileID: 1222068008}
   speedText: {fileID: 1996209785}
-  animator: {fileID: 0}
   manager: {fileID: 963194229}
 --- !u!114 &963194233
 MonoBehaviour:
@@ -3293,6 +3307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnItemsIn: {fileID: 391349086}
+  scrollView: {fileID: 1784506783}
   ogItem: {fileID: 529579945}
 --- !u!1 &990933123
 GameObject:
@@ -5962,7 +5977,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5d315c037dbe2c499a018301abfc4c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movement: 0
+  movement: 1
   dragEffect: 2
   restrictWithinPanel: 1
   constrainOnDrag: 0
@@ -6019,7 +6034,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3006
+  startingRenderQueue: 3004
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 3
@@ -7200,14 +7215,14 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 3
-  mWidth: 2
+  mWidth: 80
   mHeight: 80
   mDepth: 46
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 0.025
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -7227,7 +7242,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 0}
+  mTexture: {fileID: 2800000, guid: da32e67a516272c4386de5e2dc30196c, type: 3}
   mShader: {fileID: 4800000, guid: 41c3a56e8eed07247af7b0d5841470af, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
   mFixedAspect: 0
