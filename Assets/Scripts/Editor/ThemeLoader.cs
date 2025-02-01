@@ -21,8 +21,7 @@ public class ThemeLoader : EditorWindow
                     return;
                 }
                 
-                Preload.currentTheme = theme.name;
-                Preload.currentThemeObject = theme;
+                Preload.currentTheme = theme;
 
                 FindAnyObjectByType<AfterPreload>().Awake();
             }

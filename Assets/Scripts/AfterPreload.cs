@@ -6,9 +6,11 @@ public class AfterPreload : MonoBehaviour
     [SerializeField] private UISprite progressBar, topBar;
     public void Awake()
     {
-        logoImage.mainTexture = logoImage2.mainTexture = Preload.currentThemeObject.logoImage;
-        backgroundImage.mainTexture = Preload.currentThemeObject.backgroundImage;
-        topBar.color = Preload.currentThemeObject.topBarColor;
-        progressBar.color = Preload.currentThemeObject.progressBarColor;
+        if (Preload.currentTheme == null) return;
+
+        logoImage.mainTexture = logoImage2.mainTexture = Preload.currentTheme.logoImage;
+        backgroundImage.mainTexture = Preload.currentTheme.backgroundImage;
+        topBar.color = Preload.currentTheme.topBarColor;
+        progressBar.color = Preload.currentTheme.progressBarColor;
     }
 }

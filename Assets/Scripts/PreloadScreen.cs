@@ -10,36 +10,10 @@ public class PreloadScreen : MonoBehaviour
     [SerializeField] private Text loadingText;
     IEnumerator Start()
     {
-        string[] args = System.Environment.GetCommandLineArgs();
-        //string[] args = new string[1]{"-theme=Menu_Christmas"};
-
-        bool customTheme = false;
-        foreach (string arg in args)
-        {
-            if (arg.StartsWith("-theme="))
-            {
-                Preload.currentTheme = arg.Substring(7);
-                customTheme = true;
-                break;
-            }
-        }
-
-        if (customTheme)
-        {
-            if (!ThemeCheck()) yield return StartCoroutine(GetCurrentTheme());
-        }
-        else yield return StartCoroutine(GetCurrentTheme());
-        
-        if (!ThemeCheck())
-        {
-            Preload.currentTheme = "Menu_Colapsed_City";
-        }
-
-        Preload.currentThemeObject = Resources.Load<Theme>("Themes/" + Preload.currentTheme);
-
-        yield return StartCoroutine(GetPreviewImages());
-        yield return StartCoroutine(GetCurrentVersion());
-        yield return StartCoroutine(GetCurrentVersionLauncher());
+        yield return SetTheme();
+        yield return GetPreviewImages();
+        yield return GetCurrentVersion();
+        yield return GetCurrentVersionLauncher();
 
         yield return DownloadManager.CheckBuild();
 
@@ -47,18 +21,28 @@ public class PreloadScreen : MonoBehaviour
         SceneManager.LoadScene("LauncherNew");
     }
 
-    IEnumerator GetCurrentTheme()
+    IEnumerator SetTheme()
     {
+        string[] args = System.Environment.GetCommandLineArgs();
+        //string[] args = new string[2] { "-Theme", "Menu_Christmas" };
+
+        for (int i = 0; i < args.Length; i++)
+        {
+            if (args[0] != "-Theme") continue;
+
+            Theme.TryGet(args[i + 1], out Preload.currentTheme);
+
+            break;
+        }
+
+        if (Preload.currentTheme != null) yield break;
+
         UnityWebRequest request = UnityWebRequest.Get(Global.themeLink);
 
         yield return request.SendWebRequest();
 
-        if (request.result != UnityWebRequest.Result.Success)
-        {
-            Error("Theme Request Error.", request.error);
-            Preload.currentTheme = "Menu_Colapsed_City";
-        }
-        else Preload.currentTheme = request.downloadHandler.text;
+        if (request.result != UnityWebRequest.Result.Success) Error("Theme Request Error.", request.error);
+        else if (Theme.TryGet(request.downloadHandler.text, out Theme theme)) Preload.currentTheme = theme;
     }
 
     IEnumerator GetPreviewImages()
@@ -102,7 +86,6 @@ public class PreloadScreen : MonoBehaviour
 
     IEnumerator GetCurrentVersionLauncher()
     {
-        Chache.Texture(Global.versionLink);
         UnityWebRequest request = UnityWebRequest.Get(Global.versionLink);
 
         yield return request.SendWebRequest();
@@ -114,11 +97,6 @@ public class PreloadScreen : MonoBehaviour
             yield break;
         }
         else Preload.newVersionAviable = Version.Parse(request.downloadHandler.text) == Version.Parse(Application.version);
-    }
-
-    bool ThemeCheck()
-    {
-        return Resources.Load<Theme>("Themes/" + Preload.currentTheme) != null;
     }
 
     void Error(string error, string debugOutput)

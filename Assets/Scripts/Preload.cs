@@ -5,9 +5,7 @@ using UnityEngine;
 /// </summary>
 public static class Preload
 {
-    public static string currentTheme = string.Empty;
-
-    public static Theme currentThemeObject;
+    public static Theme currentTheme;
 
     public static Sprite previewImage;
 

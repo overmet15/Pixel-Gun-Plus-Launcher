@@ -15,14 +15,8 @@ public class InfoText : MonoBehaviour
     {
         if (DownloadManager.currentDownloadState != DownloadState.notDownloading) return;
 
-        if (Global.buildState == BuildState.unknownBuild)
-        {
-            text.text = "Click here to download latest game version.";
-        }
-        else if (Preload.newVersionAviable)
-        {
-            text.text = "Click here to download latest launcher update.";
-        }
+        if (Global.buildState == BuildState.unknownBuild) text.text = "Click here to download latest game version.";
+        else if (Preload.newVersionAviable) text.text = "Click here to download latest launcher update.";
         else text.text = string.Empty;
     }
 
