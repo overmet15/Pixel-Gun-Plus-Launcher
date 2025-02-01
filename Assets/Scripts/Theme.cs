@@ -12,6 +12,6 @@ public class Theme : ScriptableObject
     public static bool TryGet(string name, out Theme theme)
     {
         theme = Resources.Load<Theme>($"Themes/{name}");
-        return theme == null;
+        return theme != null;
     }
 }

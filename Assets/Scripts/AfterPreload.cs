@@ -8,9 +8,14 @@ public class AfterPreload : MonoBehaviour
     {
         if (Preload.currentTheme == null) return;
 
-        logoImage.mainTexture = logoImage2.mainTexture = Preload.currentTheme.logoImage;
-        backgroundImage.mainTexture = Preload.currentTheme.backgroundImage;
-        topBar.color = Preload.currentTheme.topBarColor;
-        progressBar.color = Preload.currentTheme.progressBarColor;
+        Load(Preload.currentTheme);
+    }
+
+    public void Load(Theme theme)
+    {
+        logoImage.mainTexture = logoImage2.mainTexture = theme.logoImage;
+        backgroundImage.mainTexture = theme.backgroundImage;
+        topBar.color = theme.topBarColor;
+        progressBar.color = theme.progressBarColor;
     }
 }

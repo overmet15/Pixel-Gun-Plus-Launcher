@@ -30,38 +30,29 @@ public class PreloadScreen : MonoBehaviour
         {
             if (args[0] != "-Theme") continue;
 
-            Theme.TryGet(args[i + 1], out Preload.currentTheme);
+            if (Theme.TryGet(args[i + 1], out Preload.currentTheme))
+            {
+                Debug.Log($"Loaded custom theme: {args[i + 1]}");
+            }
 
             break;
         }
 
         if (Preload.currentTheme != null) yield break;
-
         UnityWebRequest request = UnityWebRequest.Get(Global.themeLink);
 
         yield return request.SendWebRequest();
 
         if (request.result != UnityWebRequest.Result.Success) Error("Theme Request Error.", request.error);
-        else if (Theme.TryGet(request.downloadHandler.text, out Theme theme)) Preload.currentTheme = theme;
+        else if (Theme.TryGet(request.downloadHandler.text, out Preload.currentTheme))
+        {
+            Debug.Log($"Loaded Theme: {request.downloadHandler.text}");
+        }
+        else Error($"Couldn't Load Theme: {request.downloadHandler.text}");
     }
 
     IEnumerator GetPreviewImages()
     {
-        //Chache.ChacheTextures();
-        /*List<Sprite> sprites = new();
-
-        for (int i = 1; i <= 3; i++)
-        {
-            UnityWebRequest request = UnityWebRequestTexture.GetTexture("https://pixelgun.plus/~1031/Screenshots/" + i);
-            yield return request.SendWebRequest();
-
-            if (request.result == UnityWebRequest.Result.Success)
-            {
-                Texture2D texture = DownloadHandlerTexture.GetContent(request);
-                sprites.Add(Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f)));
-            }
-        }
-        Preload.previewImages = sprites.Count != 0 ? sprites : null;*/
         UnityWebRequest request = UnityWebRequest.Get(Global.previewImagesCountLink);
         yield return request.SendWebRequest();
         if (request.result != UnityWebRequest.Result.Success)

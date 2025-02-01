@@ -23,7 +23,7 @@ public class ThemeLoader : EditorWindow
                 
                 Preload.currentTheme = theme;
 
-                FindAnyObjectByType<AfterPreload>().Awake();
+                FindAnyObjectByType<AfterPreload>().Load(theme);
             }
         }
     }
