@@ -1392,6 +1392,7 @@ GameObject:
   - component: {fileID: 529579949}
   - component: {fileID: 529579948}
   - component: {fileID: 529579947}
+  - component: {fileID: 529579950}
   m_Layer: 5
   m_Name: NewsItem
   m_TagString: Untagged
@@ -1523,6 +1524,30 @@ MonoBehaviour:
   mAtlas: {fileID: 7565813219653493687, guid: b054c40356b59844984af0a01d1756d2, type: 3}
   mSpriteName: complaint_cell
   mFillCenter: 1
+--- !u!114 &529579950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529579945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c23100f83bdeff4ea49473ee6856c6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    url: 
+    previewPicture: 
+    fullpicture: 
+    shortHeader: 
+    header: 
+    shortDescription: 
+    description: 
+    category: 
+  header: {fileID: 56646814}
+  shortDesc: {fileID: 842723360}
+  date: {fileID: 1552712114}
 --- !u!1 &538908135
 GameObject:
   m_ObjectHideFlags: 0
@@ -3252,6 +3277,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 765c1760a93166740be9108f7a4d72de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnItemsIn: {fileID: 391349086}
+  ogItem: {fileID: 529579945}
 --- !u!1 &990933123
 GameObject:
   m_ObjectHideFlags: 0
