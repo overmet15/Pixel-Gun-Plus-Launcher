@@ -15,7 +15,7 @@ public class ThemeLoader : EditorWindow
         {
             if (GUILayout.Button("Set"))
             {
-                if (Application.isPlaying) 
+                if (!Application.isPlaying) 
                 {
                     Debug.LogWarning("Can't set theme outside of play mode");
                     return;
