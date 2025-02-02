@@ -7,9 +7,11 @@ public class DragWindow : MonoBehaviour, IDragHandler
 
     public void OnDrag(PointerEventData data)
     {
-        #if !UNITY_EDITOR
-            _deltaValue += data.delta;
-            BorderlessWindow.MoveWindowPos(_deltaValue, Screen.width, Screen.height);
-        #endif
+#if !UNITY_EDITOR
+        _deltaValue += data.delta;
+        BorderlessWindow.MoveWindowPos(_deltaValue, Screen.width, Screen.height);
+#else
+        Debug.Log($"Dragging Window: {data.delta}");
+#endif
     }
 }

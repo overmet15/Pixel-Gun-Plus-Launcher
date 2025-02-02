@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEngine.Networking;
 using SimpleJSON;
 using System;
+using System.IO;
+using System.Threading.Tasks;
 
 public class NewsController : MonoBehaviour
 {
@@ -24,42 +26,44 @@ public class NewsController : MonoBehaviour
             yield break;
         }
 
-        try
+        JSONNode index = JSON.Parse(request.downloadHandler.text);
+
+        foreach (JSONNode node in index)
         {
-            JSONNode index = JSON.Parse(request.downloadHandler.text);
+            NewsData data = new();
 
-            foreach (JSONNode node in index)
-            {
-                NewsData data = new();
-
-                long unixDate = node["date"];
-                data.date = DateTimeOffset.FromUnixTimeSeconds(unixDate).UtcDateTime;
+            long unixDate = node["date"];
+            data.date = DateTimeOffset.FromUnixTimeSeconds(unixDate).UtcDateTime;
                 
-                data.url = node["URL"];
+            data.url = node["URL"];
 
-                data.previewPicture = node["previewpicture"];
-                data.fullpicture = node["fullpicture"];
+            var taskPrev = Chache.DownloadOrChache(node["previewpicture"], 
+                    $"{Global.NewsPreviewPictureChachePath}/{Path.GetFileName(node["previewpicture"])}");
 
-                data.shortHeader = node["short_header"]["English"];
-                data.header = node["header"]["English"];
+            var taskFull = Chache.DownloadOrChache(node["fullpicture"], 
+                    $"{Global.NewsFullpictureChachePath}/{Path.GetFileName(node["fullpicture"])}");
 
-                data.shortDescription = node["short_description"]["English"];
-                data.description = node["description"]["English"];
+            yield return new WaitUntil(() => taskPrev.IsCompleted);
+            yield return new WaitUntil(() => taskFull.IsCompleted);
 
-                data.category = node["category"]["English"];
+            data.previewPicture = taskPrev.Result;
+            data.fullpicture = taskFull.Result;
 
-                //NewsItem obj = Instantiate(ogItem, spawnItemsIn.transform).GetComponent<NewsItem>();
-                NewsItem obj =  NGUITools.AddChild(spawnItemsIn.gameObject, ogItem).GetComponent<NewsItem>();
-                obj.data = data;
-                obj.UpdateDisplay();
-                spawnItemsIn.Reposition();
-                scrollView.ResetPosition();
-            }
-        }
-        catch
-        {
-            Debug.LogWarning("Exception on news parsing");
-            yield break;
+
+            data.shortHeader = node["short_header"]["English"];
+            data.header = node["header"]["English"];
+
+            data.shortDescription = node["short_description"]["English"];
+            data.description = node["description"]["English"];
+
+            data.category = node["category"]["English"];
+
+            //NewsItem obj = Instantiate(ogItem, spawnItemsIn.transform).GetComponent<NewsItem>();
+            NewsItem obj =  NGUITools.AddChild(spawnItemsIn.gameObject, ogItem).GetComponent<NewsItem>();
+            obj.data = data;
+            obj.UpdateDisplay();
+            spawnItemsIn.Reposition();
+            scrollView.ResetPosition();
         }
     }
 }
@@ -71,6 +75,6 @@ public struct NewsData
 {
     public DateTime date;
     public string url;
-    public string previewPicture, fullpicture;
     public string shortHeader, header, shortDescription, description, category;
+    public Texture2D previewPicture, fullpicture;
 }

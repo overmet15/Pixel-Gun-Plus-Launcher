@@ -20,7 +20,7 @@ public class DownloadManager : MonoBehaviour
 
     public static UnityEvent<DownloadState> onDownloadStatusChange = new();
 
-    public void Download()
+    public void Download(bool isGame)
     {
         if (currentDownloadState != DownloadState.notDownloading) return;
 
@@ -30,13 +30,14 @@ public class DownloadManager : MonoBehaviour
         progressSlider.value = 0;
 
         manager.verText.text = string.Empty;
-        downloadingText.text = "DOWNLOADING " + Preload.GameVersion;
+        string toApply = isGame ? Preload.GameVersion.ToString() : Preload.LauncherVersionAviable.ToString();
+        downloadingText.text = $"DOWNLOADING {toApply}";
         procentText.text = "0%";
 
         currentDownloadState = DownloadState.inProcess;
         onDownloadStatusChange.Invoke(DownloadState.inProcess);
 
-        StartCoroutine(DownloadGame());
+        StartCoroutine(DownloadCoroutine(isGame));
     }
 
     public static async Task CheckBuild()
@@ -74,7 +75,7 @@ public class DownloadManager : MonoBehaviour
         speedText.text = speed + " MB/s";
     }
 
-    IEnumerator DownloadGame()
+    IEnumerator DownloadCoroutine(bool isGame)
     {
         // check if there is build
         File.Delete(Global.TempZipPath);
@@ -131,8 +132,6 @@ public class DownloadManager : MonoBehaviour
 
         if (!Directory.Exists(Global.GameFolderPath)) 
             Directory.CreateDirectory(Global.GameFolderPath);
-
-        //Process unzipProgress = Utils.Unzip(Global.TempZipPath, Global.GameFolderPath);
 
         try
         {

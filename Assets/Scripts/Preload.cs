@@ -11,6 +11,7 @@ public static class Preload
     public static Texture2D[] previewImages;
 
     public static Version GameVersion;
+    public static Version LauncherVersionAviable;
 
     public static bool newVersionAviable;
 }

@@ -88,13 +88,20 @@ public class PreloadScreen : MonoBehaviour
 
         yield return request.SendWebRequest();
 
-        if (request.result != UnityWebRequest.Result.Success) 
+        if (request.result != UnityWebRequest.Result.Success)
         {
             Error("Unable to get current launcher version.", $"Couldnt get version: {request.error}");
             Preload.newVersionAviable = false;
+            Preload.LauncherVersionAviable = Version.Parse("0.0.0");
             yield break;
         }
-        else Preload.newVersionAviable = Version.Parse(request.downloadHandler.text) == Version.Parse(Application.version);
+        else
+        {
+            Preload.LauncherVersionAviable = Version.Parse(request.downloadHandler.text);
+            Preload.newVersionAviable = Preload.LauncherVersionAviable == Version.Parse(Application.version);
+        }
+
+
     }
 
     void Error(string error, string debugOutput)

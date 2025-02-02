@@ -277,7 +277,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 12.583333
+  aspectRatio: 9.333333
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 114167634938775653, guid: 0d510594db7bf5b45924d9acffea9ab9, type: 3}
@@ -1554,16 +1554,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
     url: 
-    previewPicture: 
-    fullpicture: 
     shortHeader: 
     header: 
     shortDescription: 
     description: 
     category: 
+    previewPicture: {fileID: 0}
+    fullpicture: {fileID: 0}
   header: {fileID: 56646814}
   shortDesc: {fileID: 842723360}
   date: {fileID: 1552712114}
+  previewPic: {fileID: 2060393200}
 --- !u!114 &529579951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2439,7 +2440,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 6.2222223
+  aspectRatio: 4.7777777
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 114167634938775653, guid: 0d510594db7bf5b45924d9acffea9ab9, type: 3}
