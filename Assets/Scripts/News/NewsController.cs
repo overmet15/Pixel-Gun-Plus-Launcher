@@ -14,8 +14,6 @@ public class NewsController : MonoBehaviour
 
     IEnumerator Start()
     {
-        //yield break;
-
         UnityWebRequest request = UnityWebRequest.Get(Global.newsLink);
 
         yield return request.SendWebRequest();
@@ -37,10 +35,10 @@ public class NewsController : MonoBehaviour
                 
             data.url = node["URL"];
 
-            var taskPrev = Chache.DownloadOrChache(node["previewpicture"], 
+            var taskPrev = Cache.DownloadOrCache(node["previewpicture"], 
                     $"{Global.NewsPreviewPictureChachePath}/{Path.GetFileName(node["previewpicture"])}");
 
-            var taskFull = Chache.DownloadOrChache(node["fullpicture"], 
+            var taskFull = Cache.DownloadOrCache(node["fullpicture"], 
                     $"{Global.NewsFullpictureChachePath}/{Path.GetFileName(node["fullpicture"])}");
 
             yield return new WaitUntil(() => taskPrev.IsCompleted);

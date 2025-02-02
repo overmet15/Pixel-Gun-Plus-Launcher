@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public static class Chache
+public static class Cache
 {
-    public static List<string> chachedPaths = new();
+    public static List<string> cachedPaths = new();
 
     public static async Task ChachePreviewImages(int count)
     {
@@ -17,17 +17,17 @@ public static class Chache
 
         for (int i = 1; i <= count; i++)
         {
-            Texture2D tex = await DownloadOrChache($"{Global.previewImagesLink}/{i}", $"{Global.PreviewImagesChachePath}/{i}.png");
+            Texture2D tex = await DownloadOrCache($"{Global.previewImagesLink}/{i}", $"{Global.PreviewImagesChachePath}/{i}.png");
             Preload.previewImages[i - 1] = tex;
         }
     }
 
-    public static async Task<Texture2D> DownloadOrChache(string url, string path, FilterMode filterMode = FilterMode.Point)
+    public static async Task<Texture2D> DownloadOrCache(string url, string path, FilterMode filterMode = FilterMode.Point)
     {
         if(!Directory.Exists(Path.GetDirectoryName(path)))
             Directory.CreateDirectory(Path.GetDirectoryName(path));
         
-        chachedPaths.Add(path);
+        cachedPaths.Add(path);
 
         if (File.Exists(path))
         {
@@ -37,6 +37,7 @@ public static class Chache
 
                 Texture2D tex = new(2, 2);
                 tex.LoadImage(bytes, false);
+                tex.filterMode = filterMode;
 
                 return tex;
             }

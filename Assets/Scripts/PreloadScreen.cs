@@ -58,13 +58,13 @@ public class PreloadScreen : MonoBehaviour
         if (request.result != UnityWebRequest.Result.Success)
         {
             Error("Couldn't Get Preview Image Count");
-            var taskErr = Chache.ChachePreviewImages(0);
+            var taskErr = Cache.ChachePreviewImages(0);
             yield return new WaitUntil(() => taskErr.IsCompleted);
 
             yield break;
         }
 
-        var task = Chache.ChachePreviewImages(int.Parse(request.downloadHandler.text));
+        var task = Cache.ChachePreviewImages(int.Parse(request.downloadHandler.text));
         yield return new WaitUntil(() => task.IsCompleted);
     }
 
