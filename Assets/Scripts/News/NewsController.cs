@@ -5,6 +5,7 @@ using SimpleJSON;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using UnityEditor.PackageManager.Requests;
 
 public class NewsController : MonoBehaviour
 {
@@ -12,8 +13,11 @@ public class NewsController : MonoBehaviour
     [SerializeField] private UIScrollView scrollView;
     [SerializeField] private GameObject ogItem;
 
+    public JSONNode currentNewsNode;
+
     IEnumerator Start()
     {
+        currentNewsNode = new JSONArray();
         UnityWebRequest request = UnityWebRequest.Get(Global.newsLink);
 
         yield return request.SendWebRequest();
@@ -36,14 +40,22 @@ public class NewsController : MonoBehaviour
 
         JSONNode index = JSON.Parse(request.downloadHandler.text);
 
+        int curID = 0;
         foreach (JSONNode node in index)
         {
-            NewsData data = new();
+            NewsData data = new()
+            {
+                id = curID,
+                url = node["URL"],
+                shortHeader = node["short_header"]["English"],
+                header = node["header"]["English"],
+                shortDescription = node["short_description"]["English"],
+                description = node["description"]["English"],
+                category = node["category"]["English"]
+            };
 
             long unixDate = node["date"];
             data.date = DateTimeOffset.FromUnixTimeSeconds(unixDate).UtcDateTime;
-                
-            data.url = node["URL"];
 
             var taskPrev = Cache.DownloadOrCache(node["previewpicture"], 
                     $"{Global.NewsPreviewPictureChachePath}/{Path.GetFileName(node["previewpicture"])}");
@@ -57,34 +69,40 @@ public class NewsController : MonoBehaviour
             data.previewPicture = taskPrev.Result;
             data.fullpicture = taskFull.Result;
 
-
-            data.shortHeader = node["short_header"]["English"];
-            data.header = node["header"]["English"];
-
-            data.shortDescription = node["short_description"]["English"];
-            data.description = node["description"]["English"];
-
-            data.category = node["category"]["English"];
-
-            data.isNew = IsNew(indexLocal, data);
+            if (TryGetSame(indexLocal, data, out var v))
+            {
+                if (v == null) data.isNew = true;
+                else if (v["isnew"] == null || v["isnew"] == true) data.isNew = true;
+            }
+            else data.isNew = true;
 
             NewsItem obj =  NGUITools.AddChild(spawnItemsIn.gameObject, ogItem).GetComponent<NewsItem>();
             obj.data = data;
             obj.UpdateDisplay();
             spawnItemsIn.Reposition();
             scrollView.ResetPosition();
+            curID++;
+
+            node["isnews"] = false;
+
+            currentNewsNode.Add(node);
         }
 
         if (!File.Exists(Global.NewsReadPath))
             using (File.CreateText(Global.NewsReadPath)) { } // Closes the fucking stream
 
-        File.WriteAllText(Global.NewsReadPath, request.downloadHandler.text);
-    }
 
+    }
     // Returns if list contains the item
-    public bool IsNew(JSONNode list, NewsData newsItem)
+    public JSONNode TryGetSame(JSONNode list, NewsData newsItem, out JSONNode result)
     {
-        if (list == null) return true;
+        result = null;
+
+        if (list == null)
+        {
+            Debug.Log("The local news list was null, returning false");
+            return false;
+        }
 
         try
         {
@@ -92,13 +110,15 @@ public class NewsController : MonoBehaviour
             {
                 int passed = 0;
 
-                if (n["short_header"]["English"] != newsItem.shortHeader) passed++;
-                if (n["header"]["English"] != newsItem.header) passed++;
+                if (n["short_header"]["English"] == newsItem.shortHeader) passed++;
+                if (n["header"]["English"] == newsItem.header) passed++;
 
-                if (n["short_description"]["English"] != newsItem.shortDescription) passed++;
-                if (n["description"]["English"] != newsItem.description) passed++;
+                if (n["short_description"]["English"] == newsItem.shortDescription) passed++;
+                if (n["description"]["English"] == newsItem.description) passed++;
 
-                if (n["category"]["English"] != newsItem.category) passed++;
+                if (n["category"]["English"] == newsItem.category) passed++;
+
+                result = n;
 
                 if (passed == 5) return true;
             }
@@ -110,6 +130,13 @@ public class NewsController : MonoBehaviour
 
         return false;
     }
+
+
+    public void MarkAsOld(int id)
+    {
+        currentNewsNode[id]["isnew"] = false;
+        File.WriteAllText(Global.NewsReadPath, currentNewsNode.ToString());
+    }
 }
 
 #if UNITY_EDITOR
@@ -117,6 +144,7 @@ public class NewsController : MonoBehaviour
 #endif
 public struct NewsData
 {
+    public int id;
     public DateTime date;
     public string url;
     public string shortHeader, header, shortDescription, description, category;
