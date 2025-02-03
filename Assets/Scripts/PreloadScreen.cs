@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class PreloadScreen : MonoBehaviour
 {
-    [SerializeField] private Animator loadingAnimator;
-    [SerializeField] private Text loadingText;
+    [SerializeField] private UILabel loadingText;
+
     IEnumerator Start()
     {
         yield return SetTheme();
@@ -107,11 +107,9 @@ public class PreloadScreen : MonoBehaviour
     void Error(string error, string debugOutput)
     {
         Debug.LogError(debugOutput);
-
-        loadingAnimator.enabled = false;
         loadingText.text = error;
-        loadingText.color = Utils.ColorToUColor(255, 0, 0);
     }
+
     void Error(string error)
     {
         Error(error, error);

@@ -37,6 +37,7 @@ public static class Global
     public static string PreviewImagesChachePath => ChachePath + "/PreviewImages";
     public static string NewsPreviewPictureChachePath => ChachePath + "/News/PreviewImages";
     public static string NewsFullpictureChachePath => ChachePath + "/News/Fullpictures";
+    public static string NewsReadPath => ChachePath + "/News/ReadedNews.json";
 
     public static bool downloadingGame;
     public static BuildState buildState;

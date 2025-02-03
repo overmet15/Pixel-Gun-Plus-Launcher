@@ -1561,10 +1561,12 @@ MonoBehaviour:
     category: 
     previewPicture: {fileID: 0}
     fullpicture: {fileID: 0}
+    isNew: 0
   header: {fileID: 56646814}
   shortDesc: {fileID: 842723360}
   date: {fileID: 1552712114}
   previewPic: {fileID: 2060393200}
+  isNewIndicator: {fileID: 538908135}
 --- !u!114 &529579951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5416,7 +5418,7 @@ Transform:
   m_GameObject: {fileID: 1552712112}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 202, y: 27, z: 0}
+  m_LocalPosition: {x: 164, y: 27, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5452,29 +5454,29 @@ MonoBehaviour:
     absolute: 0
   updateAnchors: 1
   mColor: {r: 0.7294118, g: 0.7294118, b: 0.7294118, a: 1}
-  mPivot: 5
-  mWidth: 68
+  mPivot: 4
+  mWidth: 75
   mHeight: 24
   mDepth: 45
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 3.826087
+  aspectRatio: 3.125
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 114167634938775653, guid: 0d510594db7bf5b45924d9acffea9ab9, type: 3}
   mText: 6.11.15
   mFontSize: 23
   mFontStyle: 0
-  mAlignment: 3
+  mAlignment: 1
   mEncoding: 1
   mMaxLineCount: 0
   mEffectStyle: 0
   mEffectColor: {r: 0, g: 0, b: 0, a: 1}
   mSymbols: 1
   mEffectDistance: {x: 1, y: 1}
-  mOverflow: 2
+  mOverflow: 0
   mApplyGradient: 0
   mGradientTop: {r: 1, g: 1, b: 1, a: 1}
   mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}

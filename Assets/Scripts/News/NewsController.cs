@@ -24,6 +24,16 @@ public class NewsController : MonoBehaviour
             yield break;
         }
 
+        JSONNode indexLocal = null;
+
+        if (File.Exists(Global.NewsReadPath))
+        {
+            var t = File.ReadAllTextAsync(Global.NewsReadPath);
+            yield return new WaitUntil(() => t.IsCompleted);
+
+            indexLocal = JSON.Parse(t.Result);
+        }
+
         JSONNode index = JSON.Parse(request.downloadHandler.text);
 
         foreach (JSONNode node in index)
@@ -56,13 +66,49 @@ public class NewsController : MonoBehaviour
 
             data.category = node["category"]["English"];
 
-            //NewsItem obj = Instantiate(ogItem, spawnItemsIn.transform).GetComponent<NewsItem>();
+            data.isNew = IsNew(indexLocal, data);
+
             NewsItem obj =  NGUITools.AddChild(spawnItemsIn.gameObject, ogItem).GetComponent<NewsItem>();
             obj.data = data;
             obj.UpdateDisplay();
             spawnItemsIn.Reposition();
             scrollView.ResetPosition();
         }
+
+        if (!File.Exists(Global.NewsReadPath))
+            using (File.CreateText(Global.NewsReadPath)) { } // Closes the fucking stream
+
+        File.WriteAllText(Global.NewsReadPath, request.downloadHandler.text);
+    }
+
+    // Returns if list contains the item
+    public bool IsNew(JSONNode list, NewsData newsItem)
+    {
+        if (list == null) return true;
+
+        try
+        {
+            foreach (JSONNode n in list)
+            {
+                int passed = 0;
+
+                if (n["short_header"]["English"] != newsItem.shortHeader) passed++;
+                if (n["header"]["English"] != newsItem.header) passed++;
+
+                if (n["short_description"]["English"] != newsItem.shortDescription) passed++;
+                if (n["description"]["English"] != newsItem.description) passed++;
+
+                if (n["category"]["English"] != newsItem.category) passed++;
+
+                if (passed == 5) return true;
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.LogWarning("Couldn't check if list contains the item" + ex);
+        }
+
+        return false;
     }
 }
 
@@ -75,4 +121,5 @@ public struct NewsData
     public string url;
     public string shortHeader, header, shortDescription, description, category;
     public Texture2D previewPicture, fullpicture;
+    public bool isNew;
 }

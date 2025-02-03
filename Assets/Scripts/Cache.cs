@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 public static class Cache
 {
     public static List<string> cachedPaths = new();
-
+    public static Dictionary<string, Texture2D> textureChache = new();
     public static async Task ChachePreviewImages(int count)
     {
         //if (!Directory.Exists(Global.PreviewImagesChachePath))
@@ -24,6 +24,8 @@ public static class Cache
 
     public static async Task<Texture2D> DownloadOrCache(string url, string path, FilterMode filterMode = FilterMode.Point)
     {
+        if (textureChache.TryGetValue(path, out Texture2D val)) return val;
+
         if(!Directory.Exists(Path.GetDirectoryName(path)))
             Directory.CreateDirectory(Path.GetDirectoryName(path));
         
@@ -39,6 +41,7 @@ public static class Cache
                 tex.LoadImage(bytes, false);
                 tex.filterMode = filterMode;
 
+                textureChache.Add(path, tex);
                 return tex;
             }
             catch (System.Exception ex)
@@ -68,6 +71,7 @@ public static class Cache
         texWeb.LoadImage(bytesWeb);
         texWeb.filterMode = filterMode;
 
+        textureChache.Add(path, texWeb);
         return texWeb;
     }
 }
