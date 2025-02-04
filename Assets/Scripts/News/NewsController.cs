@@ -5,6 +5,7 @@ using SimpleJSON;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 public class NewsController : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class NewsController : MonoBehaviour
     [SerializeField] private GameObject ogItem;
 
     public JSONNode currentNewsNode;
+    private List<NewsItem> newsItems;
 
     IEnumerator Start()
     {
@@ -84,6 +86,7 @@ public class NewsController : MonoBehaviour
 
             node["isnews"] = false;
 
+            newsItems.Add(obj);
             currentNewsNode.Add(node);
         }
 
@@ -92,6 +95,7 @@ public class NewsController : MonoBehaviour
 
 
     }
+
     // Returns if list contains the item
     public JSONNode TryGetSame(JSONNode list, NewsData newsItem, out JSONNode result)
     {
@@ -135,6 +139,8 @@ public class NewsController : MonoBehaviour
     {
         currentNewsNode[id]["isnew"] = false;
         File.WriteAllText(Global.NewsReadPath, currentNewsNode.ToString());
+        newsItems[id].data.isNew = false;
+        newsItems[id].UpdateDisplay();
     }
 }
 
