@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public static class ProcessHandler
 {
-    public static string path => Application.streamingAssetsPath + "/../../Game/Pixel Gun Plus.exe";
     public static Process process;
 
     public static void StartMonitoringProcess()
@@ -14,7 +13,7 @@ public static class ProcessHandler
         {
             StartInfo = new ProcessStartInfo
             {
-                FileName = path,
+                FileName = Global.GameExePath,
                 UseShellExecute = true,
             },
             EnableRaisingEvents = true // Enable Exited event

@@ -5,7 +5,6 @@ using SimpleJSON;
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using UnityEditor.PackageManager.Requests;
 
 public class NewsController : MonoBehaviour
 {

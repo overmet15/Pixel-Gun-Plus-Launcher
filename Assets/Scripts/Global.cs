@@ -16,10 +16,8 @@ public static class Global
     public const string newsLink = "https://pixelgun.plus/~1031/pixelgun3d-config/lobbyNews/LobbyNews_all.json";
     public const string versionLink = "https://pixelgun.plus/~1031/Downloads/version.txt";
 
-    public const string gameDownloadLink = "https://pixelgun.plus/~1031/Downloads/Windows/game.zip";
-    //public const string gameDownloadLink = "https://pixelgun.plus/~1031/Downloads/Windows/picklegame.zip";
-
-    //public const string launcherDownloadLink = "https://pixelgun.plus/~1031/Downloads/Windows/picklegame.zip"; actual link..?
+    //public const string gameDownloadLink = "https://pixelgun.plus/~1031/Downloads/Windows/game.zip";
+    public const string gameDownloadLink = "https://pixelgun.plus/~1031/Downloads/Windows/picklegame.zip";
     public const string launcherDownloadLink = "https://pixelgun.plus/~1031/Downloads/Windows/picklegame.zip";
 
 #if !UNITY_EDITOR
@@ -32,7 +30,7 @@ public static class Global
     public static string ChachePath => Application.streamingAssetsPath + "/../../_Runtime/Chache";
 #endif
 
-    public static string GameExePath => GameFolderPath + "/Pixel Gun Plus.exe";
+    public static string GameExePath => "/media/overmet15/Disk/PG3D/PGPLauncher/_Runtime/Game/Pixel Gun Plus.x86_64";
     public static string GameVersionPath => GameFolderPath + "/version.txt";
     public static string PreviewImagesChachePath => ChachePath + "/PreviewImages";
     public static string NewsPreviewPictureChachePath => ChachePath + "/News/PreviewImages";
