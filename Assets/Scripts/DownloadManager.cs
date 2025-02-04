@@ -44,7 +44,7 @@ public class DownloadManager : MonoBehaviour
     {
         if (!Directory.Exists(Global.GameFolderPath)) Directory.CreateDirectory(Global.GameFolderPath);
 
-        bool exeExists = File.Exists(Global.GameExePath);
+        bool exeExists = File.Exists(Global.GameExecutablePath);
         bool versionExists = File.Exists(Global.GameVersionPath);
 
         if (!exeExists)

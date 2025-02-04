@@ -13,7 +13,7 @@ public static class ProcessHandler
         {
             StartInfo = new ProcessStartInfo
             {
-                FileName = Global.GameExePath,
+                FileName = Global.GameExecutablePath,
                 UseShellExecute = true,
             },
             EnableRaisingEvents = true // Enable Exited event

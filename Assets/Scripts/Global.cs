@@ -30,7 +30,12 @@ public static class Global
     public static string ChachePath => Application.streamingAssetsPath + "/../../_Runtime/Chache";
 #endif
 
-    public static string GameExePath => "/media/overmet15/Disk/PG3D/PGPLauncher/_Runtime/Game/Pixel Gun Plus.x86_64";
+#if UNITY_STANDALONE_LINUX
+    public static string GameExecutablePath => GameFolderPath + "/Pixel Gun Plus.x86_64";
+#else
+    public static string GameExecutablePath => GameFolderPath + "/Pixel Gun Plus.exe";
+
+#endif
     public static string GameVersionPath => GameFolderPath + "/version.txt";
     public static string PreviewImagesChachePath => ChachePath + "/PreviewImages";
     public static string NewsPreviewPictureChachePath => ChachePath + "/News/PreviewImages";
