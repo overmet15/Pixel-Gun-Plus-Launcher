@@ -20,7 +20,7 @@ public class DownloadManager : MonoBehaviour
 
     public static UnityEvent<DownloadState> onDownloadStatusChange = new();
 
-    public void Download(bool isGame)
+    public void Download()
     {
         if (currentDownloadState != DownloadState.notDownloading) return;
 
@@ -30,19 +30,19 @@ public class DownloadManager : MonoBehaviour
         progressSlider.value = 0;
 
         manager.verText.text = string.Empty;
-        string toApply = isGame ? Preload.GameVersion.ToString() : Preload.LauncherVersionAviable.ToString();
+        string toApply = Preload.GameVersion.ToString();
         downloadingText.text = $"DOWNLOADING {toApply}";
         procentText.text = "0%";
 
         currentDownloadState = DownloadState.inProcess;
         onDownloadStatusChange.Invoke(DownloadState.inProcess);
 
-        StartCoroutine(DownloadCoroutine(isGame));
+        StartCoroutine(DownloadCoroutine());
     }
 
     public static async Task CheckBuild()
     {
-        if (!Directory.Exists(Global.GameFolderPath)) Directory.CreateDirectory(Global.GameFolderPath);
+        if (!Directory.Exists(PrefsManager.gamePath)) Directory.CreateDirectory(Global.DefaultGameFolderPath);
 
         bool exeExists = File.Exists(Global.GameExecutablePath);
         bool versionExists = File.Exists(Global.GameVersionPath);
@@ -75,7 +75,7 @@ public class DownloadManager : MonoBehaviour
         speedText.text = speed + " MB/s";
     }
 
-    IEnumerator DownloadCoroutine(bool isGame)
+    IEnumerator DownloadCoroutine()
     {
         // check if there is build
         File.Delete(Global.TempZipPath);
@@ -130,12 +130,12 @@ public class DownloadManager : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(1.15f);
 
-        if (!Directory.Exists(Global.GameFolderPath)) 
-            Directory.CreateDirectory(Global.GameFolderPath);
+        if (!Directory.Exists(PrefsManager.gamePath)) 
+            Directory.CreateDirectory(PrefsManager.gamePath);
 
         try
         {
-            ZipFile.ExtractToDirectory(Global.TempZipPath, Global.GameFolderPath, true);
+            ZipFile.ExtractToDirectory(Global.TempZipPath, PrefsManager.gamePath, true);
         }
         catch (Exception ex)
         {

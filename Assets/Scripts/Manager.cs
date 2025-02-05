@@ -46,7 +46,7 @@ public class Manager : MonoBehaviour
         {
             StartCoroutine(TryLaunch());
         }
-        else downloadManager.Download(false);
+        else downloadManager.Download();
     }
 
     IEnumerator TryLaunch()

@@ -14,7 +14,7 @@ public class NewsController : MonoBehaviour
     [SerializeField] private GameObject ogItem;
 
     public JSONNode currentNewsNode;
-    private List<NewsItem> newsItems;
+    private List<NewsItem> newsItems = new();
 
     IEnumerator Start()
     {

@@ -15,6 +15,12 @@ public static class PrefsManager
         set => PlayerPrefs.SetString("Language", value);
     }
 
+    public static string gamePath
+    {
+        get => PlayerPrefs.GetString("GamePath", Global.DefaultGameFolderPath);
+        set => PlayerPrefs.SetString("GamePath", value);
+    }
+
     private static int BoolToInt(bool bol)
     {
         if (bol) return 1;

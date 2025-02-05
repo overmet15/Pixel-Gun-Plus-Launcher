@@ -24,12 +24,11 @@ public class InfoText : MonoBehaviour
     {   
         if (Global.buildState == BuildState.unknownBuild)
         {
-            downloadManager.Download(true);
+            downloadManager.Download();
         }
         else if (Preload.newVersionAviable)
         {
-            downloadManager.Download(false);
-            //Application.OpenURL("https://github.com/overmet15/Pixel-Gun-Plus-Launcher/releases/latest");
+            Application.OpenURL("https://github.com/overmet15/Pixel-Gun-Plus-Launcher/releases/latest");
         }
     }
 
