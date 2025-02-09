@@ -1,3 +1,4 @@
+using NUnit.Framework.Internal;
 using System;
 using System.Collections;
 using System.IO;
@@ -27,34 +28,33 @@ public class SettingsManager : MonoBehaviour
         }
     }
 
-    public void ChangeGamePath(string changeTo)
+    public void ChangeGamePath(string changeTo, bool deleteOld = false)
     {
         if (Path.GetFullPath(changeTo).StartsWith(Path.GetFullPath(PrefsManager.gamePath), StringComparison.OrdinalIgnoreCase) || changeTo == PrefsManager.gamePath)
         {
-            Debug.LogWarning("Cannot move into child directory of current directory");
+            Debug.LogWarning("Cannot move into child directory of current directory or same directory.");
             return;
         }
 
-        if (File.Exists(Global.GameExecutablePath))
-        {
-            // ToDo: ask to move
+        string resultPath = Path.Combine(changeTo, Global.subDirName);
 
-            Directory.Move(PrefsManager.gamePath, Path.Combine(changeTo, Global.subDirName));
-            /*foreach (string s in Directory.GetFiles(PrefsManager.gamePath))
+        if (deleteOld) Directory.Move(PrefsManager.gamePath, Path.Combine(changeTo, Global.subDirName));
+        else
+        {
+            if (!Directory.Exists(resultPath)) Directory.CreateDirectory(resultPath);
+
+            foreach (string s in Directory.GetFiles(PrefsManager.gamePath))
             {
-                Debug.LogWarning($"{changeTo}\\{Path.GetFileName(s)}");
-                File.Move(s, $"{changeTo}\\{Path.GetFileName(s)}");
+                File.Copy(s, Path.Combine(resultPath, Path.GetFileName(s)));
             }
 
             foreach (string s in Directory.GetDirectories(PrefsManager.gamePath))
             {
-                Debug.LogWarning($"{changeTo}\\{Path.GetFileName(s)}");
-
-                Directory.Move(s, $"{changeTo}\\{Path.GetFileName(s)}");
-            }*/
+                Utils.CopyDirectory(s, Path.Combine(resultPath, Path.GetFileName(s)));
+            }
         }
-
-        PrefsManager.gamePath = Path.Combine(changeTo, Global.subDirName);
+        
+        PrefsManager.gamePath = resultPath;
     }
 
     void OnDebugValueChanged(bool val)

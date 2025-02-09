@@ -27,4 +27,22 @@ public static class Utils
 
         return process;
     }
+
+    public static void CopyDirectory(string dir, string dest)
+    {
+        if (string.IsNullOrEmpty(dir) || string.IsNullOrEmpty(dest)) return;
+
+        if (!Directory.Exists(dest)) Directory.CreateDirectory(dest);
+
+        foreach (string s in Directory.GetFiles(dir))
+        {
+            File.Copy(s, Path.Combine(dest, Path.GetFileName(s)));
+        }
+
+        foreach (string s in Directory.GetDirectories(dir))
+        {
+            //UnityEngine.Debug.LogWarning($"{s}, {Path.Combine(dest, Path.GetFileName(s))}");
+            CopyDirectory(s, Path.Combine(dest, Path.GetFileName(s)));
+        }
+    }
 }
