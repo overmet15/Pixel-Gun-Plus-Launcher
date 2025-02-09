@@ -75,6 +75,21 @@ public class Manager : MonoBehaviour
     {
     }
 
+    public void OnManagePreButton()
+    {
+        ui.manageGamePanel.SetActive(!ui.manageGamePanel.activeSelf);
+    }
+
+    public void ResetLauncher()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+
+    public void OnManageButton()
+    {
+        //ui.manageGameInstalledPanel.SetActive(!ui.manageGameInstalledPanel.activeSelf); NOT YET!
+    }
+
     public void OnQuitButton()
     {
 #if UNITY_EDITOR
