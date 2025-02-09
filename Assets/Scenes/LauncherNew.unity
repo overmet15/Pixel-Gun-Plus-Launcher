@@ -3342,7 +3342,11 @@ MonoBehaviour:
   pressedSprite2D: {fileID: 0}
   disabledSprite2D: {fileID: 0}
   pixelSnap: 0
-  onClick: []
+  onClick:
+  - mTarget: {fileID: 963194229}
+    mMethodName: OnChangePathButton
+    mParameters: []
+    oneShot: 0
 --- !u!1 &940682184
 GameObject:
   m_ObjectHideFlags: 0

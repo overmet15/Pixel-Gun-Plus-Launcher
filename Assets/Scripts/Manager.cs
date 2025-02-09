@@ -80,6 +80,11 @@ public class Manager : MonoBehaviour
         ui.manageGamePanel.SetActive(!ui.manageGamePanel.activeSelf);
     }
 
+    public void OnChangePathButton()
+    {
+        SettingsManager.OpenGamePathPicking(true);
+    }
+
     public void ResetLauncher()
     {
         PlayerPrefs.DeleteAll();
