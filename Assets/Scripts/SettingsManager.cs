@@ -42,11 +42,11 @@ public class SettingsManager : MonoBehaviour
         }
 
         string resultPath = Path.Combine(changeTo, Global.subDirName);
+        if (!Directory.Exists(resultPath)) Directory.CreateDirectory(resultPath);
 
-        if (deleteOld) Directory.Move(PrefsManager.gamePath, Path.Combine(changeTo, Global.subDirName));
+        if (deleteOld) Directory.Move(PrefsManager.gamePath, resultPath);
         else
         {
-            if (!Directory.Exists(resultPath)) Directory.CreateDirectory(resultPath);
 
             foreach (string s in Directory.GetFiles(PrefsManager.gamePath))
             {
