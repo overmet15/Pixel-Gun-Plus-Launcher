@@ -32,17 +32,26 @@ public static class Utils
     {
         if (string.IsNullOrEmpty(dir) || string.IsNullOrEmpty(dest)) return;
 
-        if (!Directory.Exists(dest)) Directory.CreateDirectory(dest);
-
-        foreach (string s in Directory.GetFiles(dir))
+        try
         {
-            File.Copy(s, Path.Combine(dest, Path.GetFileName(s)));
+            if (!Directory.Exists(dest)) Directory.CreateDirectory(dest);
+
+            foreach (string s in Directory.GetFiles(dir))
+            {
+                if (!Directory.Exists(Path.Combine(dest, Path.GetFileName(s)))) Directory.CreateDirectory(Path.Combine(dest, Path.GetFileName(s)));
+
+                File.Copy(s, Path.Combine(dest, Path.GetFileName(s)));
+            }
+
+            foreach (string s in Directory.GetDirectories(dir))
+            {
+                //UnityEngine.Debug.LogWarning($"{s}, {Path.Combine(dest, Path.GetFileName(s))}");
+                CopyDirectory(s, Path.Combine(dest, Path.GetFileName(s)));
+            }
         }
-
-        foreach (string s in Directory.GetDirectories(dir))
+        catch (Exception ex)
         {
-            //UnityEngine.Debug.LogWarning($"{s}, {Path.Combine(dest, Path.GetFileName(s))}");
-            CopyDirectory(s, Path.Combine(dest, Path.GetFileName(s)));
+            UnityEngine.Debug.Log("Exception on CopyDirectory: " + ex.Message);
         }
     }
 }

@@ -21,11 +21,11 @@ public static class Global
     public const string subDirName = "PixelGunPlus";
 
 #if !UNITY_EDITOR
-    public static string DefaultGameFolderPath => Application.dataPath + "/../Game";
+    public static string DefaultGameFolderPath => Application.dataPath + "/../Game/PixelGunPlus";
     public static string TempZipPath => Application.dataPath + "/../Temp.zip";
     public static string ChachePath => Application.dataPath + "/../Chache";
 #else
-    public static string DefaultGameFolderPath => Application.dataPath + "/../_Runtime/Game";
+    public static string DefaultGameFolderPath => Application.dataPath + "/../_Runtime/Game/PixelGunPlus";
     public static string TempZipPath => Application.dataPath + "/../_Runtime/Temp.zip";
     public static string ChachePath => Application.dataPath + "/../_Runtime/Chache";
 #endif
