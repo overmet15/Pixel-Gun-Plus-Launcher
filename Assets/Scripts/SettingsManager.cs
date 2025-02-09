@@ -42,24 +42,27 @@ public class SettingsManager : MonoBehaviour
         }
 
         string resultPath = Path.Combine(changeTo, Global.subDirName);
-        if (!Directory.Exists(resultPath)) Directory.CreateDirectory(resultPath);
-
-        if (deleteOld) Directory.Move(PrefsManager.gamePath, resultPath);
-        else
+        if (Directory.Exists(PrefsManager.gamePath))
         {
-
-            foreach (string s in Directory.GetFiles(PrefsManager.gamePath))
+            if (deleteOld) Directory.Move(PrefsManager.gamePath, resultPath);
+            else
             {
-                File.Copy(s, Path.Combine(resultPath, Path.GetFileName(s)));
-            }
 
-            foreach (string s in Directory.GetDirectories(PrefsManager.gamePath))
-            {
-                Utils.CopyDirectory(s, Path.Combine(resultPath, Path.GetFileName(s)));
+                foreach (string s in Directory.GetFiles(PrefsManager.gamePath))
+                {
+                    File.Copy(s, Path.Combine(resultPath, Path.GetFileName(s)));
+                }
+
+                foreach (string s in Directory.GetDirectories(PrefsManager.gamePath))
+                {
+                    Utils.CopyDirectory(s, Path.Combine(resultPath, Path.GetFileName(s)));
+                }
             }
         }
         
         PrefsManager.gamePath = resultPath;
+
+        DownloadManager.CheckBuild();
     }
 
     void OnDebugValueChanged(bool val)
