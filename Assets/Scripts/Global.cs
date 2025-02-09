@@ -45,5 +45,6 @@ public static class Global
 
     public static bool downloadingGame;
     public static BuildState buildState;
+    public static bool installed;
     public static Version localVersion;
 }

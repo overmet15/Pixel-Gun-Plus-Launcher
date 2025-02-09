@@ -1978,7 +1978,7 @@ MonoBehaviour:
   pixelSnap: 0
   onClick:
   - mTarget: {fileID: 963194229}
-    mMethodName: OnManagePreButton
+    mMethodName: OnManageButton
     mParameters: []
     oneShot: 0
 --- !u!65 &549756623
