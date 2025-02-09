@@ -29,13 +29,12 @@ public class Manager : MonoBehaviour
         main.SetActive(true);
 
         if (Global.buildState != BuildState.noBuild && Global.buildState != BuildState.unknownBuild) verText.text = Global.localVersion.ToString();
-
         switch (Global.buildState)
         {
             case BuildState.noBuild: mainText.text = "DOWNLOAD"; break;
-            case BuildState.unknownBuild: verText.text = "UNKNOWN VERSION"; mainText.text = "PLAY"; break;
-            case BuildState.updateNeeded: outdated.SetActive(true); mainText.text = "UPDATE"; break;
-            case BuildState.upToDate: mainText.text = "PLAY"; break;
+            case BuildState.unknownBuild: verText.text = "UNKNOWN VERSION"; mainText.text = "PLAY"; Global.installed = true; break;
+            case BuildState.updateNeeded: outdated.SetActive(true); mainText.text = "UPDATE"; Global.installed = true; break;
+            case BuildState.upToDate: mainText.text = "PLAY"; Global.installed = true; break;
         }
     }
 
@@ -75,9 +74,16 @@ public class Manager : MonoBehaviour
     {
     }
 
-    public void OnManagePreButton()
+    public void OnManageButton()
     {
-        ui.manageGamePanel.SetActive(!ui.manageGamePanel.activeSelf);
+        if (Global.installed)
+        {
+            //ui.manageGameInstalledPanel.SetActive(!ui.manageGameInstalledPanel.activeSelf); NOT YET!
+        }
+        else
+        {
+            ui.manageGamePanel.SetActive(!ui.manageGamePanel.activeSelf);
+        }
     }
 
     public void OnChangePathButton()
@@ -88,11 +94,6 @@ public class Manager : MonoBehaviour
     public void ResetLauncher()
     {
         PlayerPrefs.DeleteAll();
-    }
-
-    public void OnManageButton()
-    {
-        //ui.manageGameInstalledPanel.SetActive(!ui.manageGameInstalledPanel.activeSelf); NOT YET!
     }
 
     public void OnQuitButton()
