@@ -756,7 +756,22 @@ PlayerSettings:
   webGLWebAssemblyBigInt: 0
   webGLCloseOnQuit: 0
   webWasm2023: 0
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    Android: CT_PROC;CT_FB
+    EmbeddedLinux: CT_PROC;CT_FB
+    GameCoreXboxOne: CT_PROC;CT_FB
+    Nintendo Switch: CT_PROC;CT_FB
+    PS4: CT_PROC;CT_FB
+    PS5: CT_PROC;CT_FB
+    QNX: CT_PROC;CT_FB
+    ReservedCFE: CT_PROC;CT_FB
+    Standalone: CT_PROC;CT_FB
+    VisionOS: CT_PROC;CT_FB
+    WebGL: CT_PROC;CT_FB
+    Windows Store Apps: CT_PROC;CT_FB
+    XboxOne: CT_PROC;CT_FB
+    iPhone: CT_PROC;CT_FB
+    tvOS: CT_PROC;CT_FB
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
