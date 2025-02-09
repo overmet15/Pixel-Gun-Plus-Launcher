@@ -23,12 +23,17 @@ public class SettingsManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            string[] test = SFB.StandaloneFileBrowser.OpenFolderPanel("", PrefsManager.gamePath, false);
-            if (test.Length > 0) ChangeGamePath(test[0]);
+            OpenGamePathPicking();
         }
     }
 
-    public void ChangeGamePath(string changeTo, bool deleteOld = false)
+    public static void OpenGamePathPicking(bool deleteOld = false)
+    {
+        string[] test = SFB.StandaloneFileBrowser.OpenFolderPanel("Select folder.", PrefsManager.gamePath, false);
+        if (test.Length > 0) ChangeGamePath(test[0], deleteOld);
+    }
+
+    public static void ChangeGamePath(string changeTo, bool deleteOld = false)
     {
         if (Path.GetFullPath(changeTo).StartsWith(Path.GetFullPath(PrefsManager.gamePath), StringComparison.OrdinalIgnoreCase) || changeTo == PrefsManager.gamePath)
         {
