@@ -18,6 +18,7 @@ public static class Global
     //public const string gameDownloadLink = "https://pixelgun.plus/~1031/Downloads/Windows/game.zip";
     public const string gameDownloadLink = "https://pixelgun.plus/~1031/Downloads/Windows/picklegame.zip";
     public const string launcherDownloadLink = "https://pixelgun.plus/~1031/Downloads/Windows/picklegame.zip";
+    public const string gameExecutableName = "Pixel Gun Plus.exe";
     public const string subDirName = "PixelGunPlus";
 
 #if !UNITY_EDITOR

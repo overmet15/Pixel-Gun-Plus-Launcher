@@ -2,21 +2,15 @@ using NUnit.Framework.Internal;
 using System;
 using System.Collections;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SettingsManager : MonoBehaviour
 {
-    [SerializeField] private Toggle debug;
-    [SerializeField] private GameObject debugText;
-
     void Start()
     {
-        debug.isOn = PrefsManager.debugMode;
-        
-        debugText.SetActive(PrefsManager.debugMode);
 
-        debug.onValueChanged.AddListener(OnDebugValueChanged);
     }
 
     private void Update()
@@ -35,39 +29,34 @@ public class SettingsManager : MonoBehaviour
 
     public static void ChangeGamePath(string changeTo, bool deleteOld = false)
     {
-        if (Path.GetFullPath(changeTo).StartsWith(Path.GetFullPath(PrefsManager.gamePath), StringComparison.OrdinalIgnoreCase) || changeTo == PrefsManager.gamePath)
-        {
-            Debug.LogWarning("Cannot move into child directory of current directory or same directory.");
-            return;
-        }
+        string resultPath;
 
-        string resultPath = Path.Combine(changeTo, Global.subDirName);
+        if (Directory.GetFiles(changeTo).Contains(Path.Combine(changeTo, Global.gameExecutableName))) resultPath = changeTo;
+        else resultPath = Path.Combine(changeTo, Global.subDirName);
+
         if (Directory.Exists(PrefsManager.gamePath))
         {
-            if (deleteOld) Directory.Move(PrefsManager.gamePath, resultPath);
-            else
+            if (!Path.GetFullPath(changeTo).StartsWith(Path.GetFullPath(PrefsManager.gamePath), StringComparison.OrdinalIgnoreCase) || changeTo != PrefsManager.gamePath)
             {
-
-                foreach (string s in Directory.GetFiles(PrefsManager.gamePath))
+                if (deleteOld) Directory.Move(PrefsManager.gamePath, resultPath);
+                else
                 {
-                    File.Copy(s, Path.Combine(resultPath, Path.GetFileName(s)));
-                }
+                    foreach (string s in Directory.GetFiles(PrefsManager.gamePath))
+                    {
+                        File.Copy(s, Path.Combine(resultPath, Path.GetFileName(s)));
+                    }
 
-                foreach (string s in Directory.GetDirectories(PrefsManager.gamePath))
-                {
-                    Utils.CopyDirectory(s, Path.Combine(resultPath, Path.GetFileName(s)));
+                    foreach (string s in Directory.GetDirectories(PrefsManager.gamePath))
+                    {
+                        Utils.CopyDirectory(s, Path.Combine(resultPath, Path.GetFileName(s)));
+                    }
                 }
             }
+            else Debug.LogWarning("Cannot move into child directory of current directory or same directory.");
         }
         
         PrefsManager.gamePath = resultPath;
 
-        DownloadManager.CheckBuild();
-    }
-
-    void OnDebugValueChanged(bool val)
-    {
-        PrefsManager.debugMode = val;
-        debugText.SetActive(val);
+        Manager.instance.Check(true);
     }
 }

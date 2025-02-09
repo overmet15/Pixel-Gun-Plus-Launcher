@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Manager : MonoBehaviour
 {
-
+    public static Manager instance { get; private set; }
     [SerializeField] private UILabel mainText;
     public UILabel verText;
     [SerializeField] private GameObject main, downloading, mainScreen, background, outdated;
@@ -16,6 +16,11 @@ public class Manager : MonoBehaviour
 
     private bool newsOpen, creditsOpen, settingsOpen;
 
+    private void Awake()
+    {
+        instance = this;
+    }
+
     private void Start()
     {
         Check(true);
@@ -23,6 +28,16 @@ public class Manager : MonoBehaviour
 
     public void Check(bool playAnim)
     {
+        StartCoroutine(CheckCoroutine(playAnim));
+    }
+
+    IEnumerator CheckCoroutine(bool playAnim)
+    {
+        Debug.Log("called");
+        var task = DownloadManager.CheckBuild();
+
+        while (!task.IsCompleted) yield return null;
+
         verText.text = "NOT INSTALLED";
 
         downloading.SetActive(false);
