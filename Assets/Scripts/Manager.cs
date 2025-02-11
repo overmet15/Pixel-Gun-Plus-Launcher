@@ -10,15 +10,18 @@ public class Manager : MonoBehaviour
     [SerializeField] private DownloadManager downloadManager;
     [SerializeField] private LauncherUI ui;
 
+    public PopupHandler popup;
+
     public GameObject unaviableScreen;
 
-    public bool downloadingGame;
+    public GameObject splashScreen;
 
-    private bool newsOpen, creditsOpen, settingsOpen;
+    public bool downloadingGame;
 
     private void Awake()
     {
         instance = this;
+        splashScreen.SetActive(!PrefsManager.skipIntro);
     }
 
     private void Start()
@@ -42,18 +45,19 @@ public class Manager : MonoBehaviour
 
         downloading.SetActive(false);
         main.SetActive(true);
+        ui.manageGameInstalledPanel.SetActive(false);
+        ui.manageGamePanel.SetActive(false);
 
         if (Global.buildState != BuildState.noBuild && Global.buildState != BuildState.unknownBuild) verText.text = Global.localVersion.ToString();
         switch (Global.buildState)
         {
-            case BuildState.noBuild: mainText.text = "DOWNLOAD"; break;
+            case BuildState.noBuild: mainText.text = "DOWNLOAD"; Global.installed = false; break;
             case BuildState.unknownBuild: verText.text = "UNKNOWN VERSION"; mainText.text = "PLAY"; Global.installed = true; break;
             case BuildState.updateNeeded: outdated.SetActive(true); mainText.text = "UPDATE"; Global.installed = true; break;
             case BuildState.upToDate: mainText.text = "PLAY"; Global.installed = true; break;
         }
     }
 
-    // UGUI, WRONG!!! NGUI! things
     public void OnMainButton()
     {
         if (Global.buildState == BuildState.upToDate || Global.buildState == BuildState.unknownBuild) 
@@ -75,25 +79,28 @@ public class Manager : MonoBehaviour
     {
         ui.creditsPanel.SetActive(!ui.creditsPanel.activeSelf);
         ui.newsPanel.SetActive(false);
-        //ui.settingsPanel.SetActive(false);
+        ui.settingsPanel.SetActive(false);
     }
 
     public void OnNewsButton()
     {
         ui.newsPanel.SetActive(!ui.newsPanel.activeSelf);
         ui.creditsPanel.SetActive(false);
-        //ui.settingsPanel.SetActive(false);
+        ui.settingsPanel.SetActive(false);
     }
 
     public void OnSettingsButton()
     {
+        ui.settingsPanel.SetActive(!ui.settingsPanel.activeSelf);
+        ui.creditsPanel.SetActive(false);
+        ui.newsPanel.SetActive(false);
     }
 
     public void OnManageButton()
     {
         if (Global.installed)
         {
-            //ui.manageGameInstalledPanel.SetActive(!ui.manageGameInstalledPanel.activeSelf); NOT YET!
+            ui.manageGameInstalledPanel.SetActive(!ui.manageGameInstalledPanel.activeSelf);
         }
         else
         {
@@ -101,9 +108,21 @@ public class Manager : MonoBehaviour
         }
     }
 
+    public void OnOpenPathButton()
+    {
+        SettingsManager.OpenPath(PrefsManager.gamePath);
+    }
+
     public void OnChangePathButton()
     {
-        SettingsManager.OpenGamePathPicking(true);
+        if (Global.installed)
+        {
+            SettingsManager.OpenGamePathPicking(true, true);
+        }
+        else
+        {
+            SettingsManager.OpenGamePathPicking(true, false);
+        }
     }
 
     public void ResetLauncher()

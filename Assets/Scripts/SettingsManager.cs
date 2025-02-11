@@ -1,44 +1,46 @@
-using NUnit.Framework.Internal;
 using System;
-using System.Collections;
 using System.IO;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class SettingsManager : MonoBehaviour
 {
-    void Start()
+    public static void OpenPath(string path)
     {
-
+        Application.OpenURL("file://" + path);
     }
 
-    private void Update()
+    public static void OpenGamePathPicking(bool deleteOld = false, bool openPopup = false)
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        string[] test = SFB.StandaloneFileBrowser.OpenFolderPanel("Select folder.", PrefsManager.gamePath, false);
+        if (test.Length > 0) 
         {
-            OpenGamePathPicking();
+            if (!openPopup)
+            {
+                ChangeGamePath(test[0], deleteOld);
+            }
+            else if (test[0] != PrefsManager.gamePath)
+            {
+                Manager.instance.popup.gameObject.SetActive(true);
+                Manager.instance.popup.path = test[0];
+                Manager.instance.popup.ShowPopup();
+            }
         }
     }
 
-    public static void OpenGamePathPicking(bool deleteOld = false)
-    {
-        string[] test = SFB.StandaloneFileBrowser.OpenFolderPanel("Select folder.", PrefsManager.gamePath, false);
-        if (test.Length > 0) ChangeGamePath(test[0], deleteOld);
-    }
-
-    public static void ChangeGamePath(string changeTo, bool deleteOld = false)
+    public static void ChangeGamePath(string changeTo, bool moveOld = false, bool deleteOld = false, bool ignoreOld = false)
     {
         string resultPath;
 
         if (Directory.GetFiles(changeTo).Contains(Path.Combine(changeTo, Global.gameExecutableName))) resultPath = changeTo;
         else resultPath = Path.Combine(changeTo, Global.subDirName);
 
-        if (Directory.Exists(PrefsManager.gamePath))
+        if (Directory.Exists(PrefsManager.gamePath) && !ignoreOld)
         {
             if (!Path.GetFullPath(changeTo).StartsWith(Path.GetFullPath(PrefsManager.gamePath), StringComparison.OrdinalIgnoreCase) || changeTo != PrefsManager.gamePath)
             {
-                if (deleteOld) Directory.Move(PrefsManager.gamePath, resultPath);
+                if (deleteOld) Directory.Delete(PrefsManager.gamePath);
+                else if (moveOld) Directory.Move(PrefsManager.gamePath, resultPath);
                 else
                 {
                     foreach (string s in Directory.GetFiles(PrefsManager.gamePath))

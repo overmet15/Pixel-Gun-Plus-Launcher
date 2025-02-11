@@ -2,11 +2,10 @@ using UnityEngine;
 
 public static class PrefsManager
 {
-
     public static bool debugMode
     {
-        get => PlayerPrefs.GetInt("DebugMode", 0) == 1;
-        set => PlayerPrefs.SetInt("DebugMode", BoolToInt(value));
+        get => GetBool("DebugMode", false);
+        set => SetBool("DebugMode", value);
     }
 
     public static string language
@@ -20,10 +19,19 @@ public static class PrefsManager
         get => PlayerPrefs.GetString("GamePath", Global.DefaultGameFolderPath);
         set => PlayerPrefs.SetString("GamePath", value);
     }
-
-    private static int BoolToInt(bool bol)
+    public static bool skipIntro
     {
-        if (bol) return 1;
-        return 0;
+        get => GetBool("skipIntro");
+        set => SetBool("skipIntro", value);
+    }
+
+    private static bool GetBool(string key, bool defaultValue = false)
+    {
+        return PlayerPrefs.GetInt(key, defaultValue ? 1 : 0) == 1;
+    }
+
+    private static void SetBool(string key, bool value)
+    {
+        PlayerPrefs.SetInt(key, value ? 1 : 0);
     }
 }
