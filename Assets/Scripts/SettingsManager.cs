@@ -61,4 +61,20 @@ public class SettingsManager : MonoBehaviour
 
         Manager.instance.Check(true);
     }
+
+    // DELETES EVERYTHING IN GAME PATH
+    public static void DeleteGame()
+    {
+        foreach (string s in Directory.GetFiles(PrefsManager.gamePath))
+        {
+            File.Delete(s);
+        }
+
+        foreach (string s in Directory.GetDirectories(PrefsManager.gamePath))
+        {
+            Directory.Delete(s);
+        }
+
+        Manager.instance.Check();
+    }
 }
