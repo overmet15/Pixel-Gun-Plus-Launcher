@@ -75,6 +75,6 @@ public class SettingsManager : MonoBehaviour
             Directory.Delete(s);
         }
 
-        Manager.instance.Check();
+        Manager.instance.Check(false);
     }
 }
