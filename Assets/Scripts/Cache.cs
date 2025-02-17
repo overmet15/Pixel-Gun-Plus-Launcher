@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -6,42 +8,42 @@ using UnityEngine.Networking;
 
 public static class Cache
 {
-    public static List<string> cachedPaths = new();
-    public static Dictionary<string, Texture2D> textureChache = new();
+    public static Dictionary<string, Texture2D> textureCache = new();
+    public static Dictionary<string, Task<Texture2D>> currentRequests = new();
+
     public static async Task ChachePreviewImages(int count)
     {
-        //if (!Directory.Exists(Global.PreviewImagesChachePath))
-        //    Directory.CreateDirectory(Global.PreviewImagesChachePath);
-
         Preload.previewImages = new Texture2D[count];
 
         for (int i = 1; i <= count; i++)
         {
-            Texture2D tex = await DownloadOrCache($"{Global.previewImagesLink}/{i}", $"{Global.PreviewImagesChachePath}/{i}.png");
+            Texture2D tex = await DownloadOrCache($"{Global.previewImagesLink}/{i}");
             Preload.previewImages[i - 1] = tex;
         }
     }
 
-    public static async Task<Texture2D> DownloadOrCache(string url, string path, FilterMode filterMode = FilterMode.Point)
+    public static async Task<Texture2D> DownloadOrCache(string url, FilterMode filterMode = FilterMode.Point)
     {
-        if (textureChache.TryGetValue(path, out Texture2D val)) return val;
+        string hash = Hash.ComputeSHA256(url);
 
-        if(!Directory.Exists(Path.GetDirectoryName(path)))
-            Directory.CreateDirectory(Path.GetDirectoryName(path));
-        
-        cachedPaths.Add(path);
+        if (textureCache.TryGetValue(hash, out Texture2D val)) return val;
 
-        if (File.Exists(path))
+        if(!Directory.Exists(Global.CachePath))
+            Directory.CreateDirectory(Global.CachePath);
+
+        string hashPath = Path.Combine(Global.CachePath, hash);
+
+        if (File.Exists(hashPath))
         {
             try
             {
-                byte[] bytes = await File.ReadAllBytesAsync(path);
+                byte[] bytes = await File.ReadAllBytesAsync(hashPath);
 
                 Texture2D tex = new(2, 2);
                 tex.LoadImage(bytes, false);
                 tex.filterMode = filterMode;
 
-                textureChache.Add(path, tex);
+                textureCache.Add(hash, tex);
                 return tex;
             }
             catch (System.Exception ex)
@@ -50,7 +52,41 @@ public static class Cache
             }
         }
 
-        UnityWebRequest request = UnityWebRequestTexture.GetTexture(url);
+        if (currentRequests.TryGetValue(url, out Task<Texture2D> t))
+        {
+            await t;
+
+            Debug.Log("Test");
+
+            return t.Result;
+
+        }
+        else
+        {
+            Task<Texture2D> request = Download(url, filterMode);
+
+            currentRequests.Add(url, request);
+
+            await request;
+
+            byte[] bytes = request.Result.EncodeToPNG();
+
+            using (FileStream stream = File.Create(hashPath))
+            {
+                await stream.WriteAsync(bytes, 0, bytes.Length);
+            }
+
+            await Task.Yield();
+
+            currentRequests.Remove(url);
+        }
+
+        return null;
+    }
+
+    static async Task<Texture2D> Download(string url, FilterMode filterMode)
+    {
+        using UnityWebRequest request = UnityWebRequestTexture.GetTexture(url);
 
         await request.SendWebRequest();
 
@@ -62,16 +98,10 @@ public static class Cache
 
         byte[] bytesWeb = DownloadHandlerTexture.GetContent(request).EncodeToPNG();
 
-        using (FileStream stream = File.Create(path))
-        {
-            await stream.WriteAsync(bytesWeb, 0, bytesWeb.Length);
-        }
-
         Texture2D texWeb = new(2, 2);
         texWeb.LoadImage(bytesWeb);
         texWeb.filterMode = filterMode;
 
-        textureChache.Add(path, texWeb);
         return texWeb;
     }
 }

@@ -58,11 +58,9 @@ public class NewsController : MonoBehaviour
             long unixDate = node["date"];
             data.date = DateTimeOffset.FromUnixTimeSeconds(unixDate).UtcDateTime;
 
-            var taskPrev = Cache.DownloadOrCache(node["previewpicture"], 
-                    $"{Global.NewsPreviewPictureChachePath}/{Path.GetFileName(node["previewpicture"])}");
+            var taskPrev = Cache.DownloadOrCache(node["previewpicture"]);
 
-            var taskFull = Cache.DownloadOrCache(node["fullpicture"], 
-                    $"{Global.NewsFullpictureChachePath}/{Path.GetFileName(node["fullpicture"])}");
+            var taskFull = Cache.DownloadOrCache(node["fullpicture"]);
 
             yield return new WaitUntil(() => taskPrev.IsCompleted);
             yield return new WaitUntil(() => taskFull.IsCompleted);
@@ -90,10 +88,12 @@ public class NewsController : MonoBehaviour
             currentNewsNode.Add(node);
         }
 
-        if (!File.Exists(Global.NewsReadPath))
+        string dir = Path.GetDirectoryName(Global.NewsReadPath);
+
+        if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
+
+        if (!File.Exists(Path.Combine(Global.NewsReadPath)))
             using (File.CreateText(Global.NewsReadPath)) { } // Closes the fucking stream
-
-
     }
 
     // Returns if list contains the item

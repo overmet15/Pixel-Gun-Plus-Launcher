@@ -1,3 +1,4 @@
+using System.IO;
 using UnityEngine;
 
 public enum BuildState
@@ -22,26 +23,24 @@ public static class Global
     public const string subDirName = "PixelGunPlus";
 
 #if !UNITY_EDITOR
-    public static string DefaultGameFolderPath => Application.dataPath + "/../Game/PixelGunPlus";
-    public static string TempZipPath => Application.dataPath + "/../Temp.zip";
-    public static string ChachePath => Application.dataPath + "/../Chache";
+    public static string DefaultGameFolderPath => Path.Combine(Application.dataPath, "..", "PixelGunPlus");
+    public static string TempZipPath => Path.Combine(Application.dataPath, "..", "GameDownload_DoNotTouch.zip");
+    public static string CachePath => Path.Combine(Application.dataPath, "..", "Cache");
 #else
-    public static string DefaultGameFolderPath => Application.dataPath + "/../_Runtime/Game/PixelGunPlus";
-    public static string TempZipPath => Application.dataPath + "/../_Runtime/Temp.zip";
-    public static string ChachePath => Application.dataPath + "/../_Runtime/Chache";
+    public static string DefaultGameFolderPath => Path.Combine(Application.dataPath, "..", "_Runtime", subDirName);
+    public static string TempZipPath => Path.Combine(Application.dataPath, "..", "_Runtime", "GameDownload_DoNotTouch.zip");
+    public static string CachePath => Path.Combine(Application.dataPath, "..", "_Runtime", "Cache");
 #endif
 
 #if UNITY_STANDALONE_LINUX
-    public static string GameExecutablePath => PrefsManager.gamePath + "/Pixel Gun Plus.x86_64";
+    public static string GameExecutablePath => Path.Combine(PrefsManager.gamePath, "Pixel Gun Plus.x86_64");
 #else
-    public static string GameExecutablePath => PrefsManager.gamePath + "/Pixel Gun Plus.exe";
-
+    public static string GameExecutablePath => Path.Combine(PrefsManager.gamePath, "Pixel Gun Plus.exe");
 #endif
-    public static string GameVersionPath => PrefsManager.gamePath + "/version.txt";
-    public static string PreviewImagesChachePath => ChachePath + "/PreviewImages";
-    public static string NewsPreviewPictureChachePath => ChachePath + "/News/PreviewImages";
-    public static string NewsFullpictureChachePath => ChachePath + "/News/Fullpictures";
-    public static string NewsReadPath => ChachePath + "/News/ReadedNews.json";
+
+    public static string GameVersionPath => Path.Combine(PrefsManager.gamePath, "version.txt");
+    public static string NewsReadPath => Path.Combine(CachePath, "News_DoNotDelete.json");
+
 
     public static bool downloadingGame;
     public static BuildState buildState;
