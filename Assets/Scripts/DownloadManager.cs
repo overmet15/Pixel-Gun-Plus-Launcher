@@ -20,6 +20,8 @@ public class DownloadManager : MonoBehaviour
 
     public static UnityEvent<DownloadState> onDownloadStatusChange = new();
 
+    public bool isCancel;
+
     public void Download()
     {
         if (currentDownloadState != DownloadState.notDownloading) return;
@@ -30,7 +32,11 @@ public class DownloadManager : MonoBehaviour
         progressSlider.value = 0;
 
         manager.verText.text = string.Empty;
+#if !UNITY_EDITOR
         string toApply = Preload.GameVersion.ToString();
+#else
+        string toApply = Preload.GameVersion == null ? "GameVersion is null" :Preload.GameVersion.ToString();
+#endif
         downloadingText.text = $"DOWNLOADING {toApply}";
         procentText.text = "0%";
 
@@ -77,6 +83,7 @@ public class DownloadManager : MonoBehaviour
 
     IEnumerator DownloadCoroutine()
     {
+        isCancel = false;
         // check if there is build
         File.Delete(Global.TempZipPath);
 
@@ -87,8 +94,18 @@ public class DownloadManager : MonoBehaviour
 
         request.SendWebRequest();
 
+        bool hasCanceled = false;
+
         while (!request.isDone)
         {
+            if (isCancel)
+            {
+                request.Abort();
+                hasCanceled = true;
+                isCancel = false;
+                break;
+            }
+
             string sizeString = request.GetResponseHeader("Content-Length");
             long size = Convert.ToInt64(sizeString) / 1024 / 1024;
             double bytesDownloaded = request.downloadedBytes / 1024f / 1024f;
@@ -106,13 +123,13 @@ public class DownloadManager : MonoBehaviour
             yield return null;
         }
 
-        if (request.result != UnityWebRequest.Result.Success)
+        if (request.result != UnityWebRequest.Result.Success || hasCanceled)
         {
-            Debug.LogError(request.error);
+            if (isCancel) Debug.LogError(request.error);
+            else Debug.LogWarning("Download was aborted");
 
-            yield return new WaitForSecondsRealtime(2);
+            Out();
 
-            Application.Quit();
             yield break;
         }
 
@@ -140,20 +157,27 @@ public class DownloadManager : MonoBehaviour
         catch (Exception ex)
         {
             Debug.LogError($"Error extracting zip: {ex.Message}");
+
+            Out();
+
+            yield break;
         }
 
+        yield return File.WriteAllTextAsync(Global.GameVersionPath, Preload.GameVersion.ToString());
+
+        Out();
+
+        File.Delete(Global.TempZipPath);
+    }
+
+    void Out()
+    {
         currentDownloadState = DownloadState.notDownloading;
         onDownloadStatusChange.Invoke(DownloadState.notDownloading);
-
-        yield return File.WriteAllTextAsync(Global.GameVersionPath, Preload.GameVersion.ToString());
 
         downloadingPanel.SetActive(false);
         playPanel.SetActive(true);
 
-        yield return CheckBuild();
-
         manager.Check(false);
-
-        File.Delete(Global.TempZipPath);
     }
 }

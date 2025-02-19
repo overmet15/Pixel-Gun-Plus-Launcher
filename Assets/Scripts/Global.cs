@@ -16,10 +16,14 @@ public static class Global
     public const string newsLink = "https://pixelgun.plus/~1031/pixelgun3d-config/lobbyNews/LobbyNews_all.json";
     public const string versionLink = "https://pixelgun.plus/~1031/Downloads/version.txt";
 
-    //public const string gameDownloadLink = "https://pixelgun.plus/~1031/Downloads/Windows/game.zip";
-    public const string gameDownloadLink = "https://pixelgun.plus/~1031/Downloads/Windows/picklegame.zip";
-    public const string launcherDownloadLink = "https://pixelgun.plus/~1031/Downloads/Windows/picklegame.zip";
+    public const string gameDownloadLink = "https://pixelgun.plus/~1031/Downloads/Windows/game.zip";
+
+#if UNITY_STANDALONE_LINUX
+    public const string gameExecutableName = "Pixel Gun Plus.x86_64";
+#else
     public const string gameExecutableName = "Pixel Gun Plus.exe";
+#endif
+
     public const string subDirName = "PixelGunPlus";
 
 #if !UNITY_EDITOR

@@ -36,7 +36,6 @@ public class Manager : MonoBehaviour
 
     IEnumerator CheckCoroutine(bool playAnim)
     {
-        Debug.Log("called");
         var task = DownloadManager.CheckBuild();
 
         while (!task.IsCompleted) yield return null;
