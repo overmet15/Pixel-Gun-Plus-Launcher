@@ -2446,7 +2446,7 @@ Transform:
   m_GameObject: {fileID: 319768957}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -347, y: -386, z: 0}
+  m_LocalPosition: {x: -347, y: -435, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3921,7 +3921,7 @@ Transform:
   m_GameObject: {fileID: 567697616}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -347, y: -272, z: 0}
+  m_LocalPosition: {x: -347, y: -300, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3956,16 +3956,16 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: 0, g: 0.03529412, b: 0.13333334, a: 0.78431374}
+  mColor: {r: 0, g: 0.03529412, b: 0.13333334, a: 0.84313726}
   mPivot: 4
   mWidth: 432
-  mHeight: 275
+  mHeight: 325
   mDepth: 0
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.5709091
+  aspectRatio: 1.3292308
   mType: 1
   mFillDirection: 4
   mFillAmount: 1
@@ -6224,7 +6224,7 @@ Transform:
   m_GameObject: {fileID: 944493120}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -347, y: -238, z: 0}
+  m_LocalPosition: {x: -347, y: -260, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6261,20 +6261,22 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 164
-  mHeight: 58
+  mWidth: 300
+  mHeight: 100
   mDepth: 4
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.8275862
+  aspectRatio: 3
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 114167634938775653, guid: 0d510594db7bf5b45924d9acffea9ab9, type: 3}
   mText: 'capsiii
 
-    Nexizell'
+    Nexizell
+
+    Zweronz (former)'
   mFontSize: 30
   mFontStyle: 0
   mAlignment: 0
@@ -6413,6 +6415,7 @@ MonoBehaviour:
   progressText: {fileID: 1222068008}
   speedText: {fileID: 1996209785}
   manager: {fileID: 963194229}
+  isCancel: 0
 --- !u!114 &963194233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6548,7 +6551,7 @@ Transform:
   m_GameObject: {fileID: 996973336}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -347, y: -298, z: 0}
+  m_LocalPosition: {x: -347, y: -350, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10007,7 +10010,7 @@ Transform:
   m_GameObject: {fileID: 1503374741}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -347, y: -329, z: 0}
+  m_LocalPosition: {x: -347, y: -385, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
