@@ -11,7 +11,15 @@ public class NewsController : MonoBehaviour
 {
     [SerializeField] private UIGrid spawnItemsIn;
     [SerializeField] private UIScrollView scrollView;
+    [SerializeField] private UIScrollView scrollViewViewer;
     [SerializeField] private GameObject ogItem;
+    [SerializeField] private string currentURL;
+    
+
+    public UILabel headerLabel, descLabel, desc2Label, dateLabel;
+	public UITexture newsPic;
+
+    private NewsItem curItem;
 
     public JSONNode currentNewsNode;
     private List<NewsItem> newsItems = new();
@@ -86,6 +94,11 @@ public class NewsController : MonoBehaviour
 
             newsItems.Add(obj);
             currentNewsNode.Add(node);
+            if (!curItem)
+            {
+                obj.GetComponent<UIToggle>().value = true;
+                SetItem(obj);
+            }
         }
 
         string dir = Path.GetDirectoryName(Global.NewsReadPath);
@@ -134,13 +147,48 @@ public class NewsController : MonoBehaviour
         return false;
     }
 
-
     public void MarkAsOld(int id)
     {
         currentNewsNode[id]["isnew"] = false;
         File.WriteAllText(Global.NewsReadPath, currentNewsNode.ToString());
         newsItems[id].data.isNew = false;
         newsItems[id].UpdateDisplay();
+    }
+
+    public void OnURLClick()
+	{
+		if (!string.IsNullOrEmpty(currentURL))
+		{
+			Application.OpenURL(currentURL);
+		}
+	}
+
+    public void SetItem(NewsItem item)
+    {
+        if (curItem == item) return;
+        scrollViewViewer.ResetPosition();
+        curItem = item;
+        currentURL = item.data.url;
+        headerLabel.text = item.data.header;
+        string[] array = item.data.description.Split(new string[1] { "[news-pic]" }, StringSplitOptions.None);
+        newsPic.mainTexture = null;
+		if (array.Length > 1 && item.data.fullpicture)
+		{
+			descLabel.text = array[0];
+			desc2Label.text = array[1];
+			newsPic.enabled = true;
+            newsPic.mainTexture = item.data.fullpicture;
+            newsPic.aspectRatio = (float)item.data.fullpicture.width / (float)item.data.fullpicture.height;
+		}
+		else
+		{
+			descLabel.text = item.data.description;
+			desc2Label.text = string.Empty;
+			newsPic.aspectRatio = 200f;
+			newsPic.enabled = false;
+		}
+        dateLabel.text = "[bababa]" + item.data.date.Day.ToString("D2") + "." + item.data.date.Month.ToString("D2") + "." + item.data.date.Year + " / [-]" + item.data.category;
+        MarkAsOld(item.data.id);
     }
 }
 

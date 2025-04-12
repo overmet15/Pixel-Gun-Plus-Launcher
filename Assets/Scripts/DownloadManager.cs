@@ -13,7 +13,8 @@ public class DownloadManager : MonoBehaviour
 {
     [SerializeField] private GameObject playPanel, downloadingPanel;
     [SerializeField] private UISlider progressSlider;
-    [SerializeField] private UILabel downloadingText, procentText, progressText, speedText;
+    [SerializeField] private TextGroup downloadingText, progressText, sizeText, speedText;
+    [SerializeField] private UILabel procentText;
     [SerializeField] private Manager manager;
 
     public static DownloadState currentDownloadState;
@@ -105,14 +106,14 @@ public class DownloadManager : MonoBehaviour
                 isCancel = false;
                 break;
             }
-
             string sizeString = request.GetResponseHeader("Content-Length");
             long size = Convert.ToInt64(sizeString) / 1024 / 1024;
+            sizeText.text = "/" + size + " MB";
             double bytesDownloaded = request.downloadedBytes / 1024f / 1024f;
             bytesDownloaded = Math.Round(bytesDownloaded * 10) * 0.1;
             procentText.text = (request.downloadProgress * 100).ToString("F1") + "%";
             progressSlider.value = request.downloadProgress;
-            progressText.text = bytesDownloaded.ToString() + " MB/" + size + " MB";
+            progressText.text = bytesDownloaded.ToString() + " MB";
 
             checkSpeedTimer += Time.deltaTime;
             if (checkSpeedTimer >= 0.75f)
@@ -178,6 +179,6 @@ public class DownloadManager : MonoBehaviour
         downloadingPanel.SetActive(false);
         playPanel.SetActive(true);
 
-        manager.Check(false);
+        manager.Check();
     }
 }

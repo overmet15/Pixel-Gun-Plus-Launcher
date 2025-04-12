@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class PreloadScreen : MonoBehaviour
 {
@@ -16,39 +15,25 @@ public class PreloadScreen : MonoBehaviour
         yield return GetCurrentVersionLauncher();
 
         yield return DownloadManager.CheckBuild();
-
-        //ToDo: Make option to skip unnecesary calls, or skip selected ones
-        SceneManager.LoadScene("LauncherNew");
+        SceneManager.LoadScene("Launcher");
     }
 
     IEnumerator SetTheme()
     {
-        string[] args = System.Environment.GetCommandLineArgs();
-        //string[] args = new string[2] { "-Theme", "Menu_Christmas" };
-
-        for (int i = 0; i < args.Length; i++)
-        {
-            if (args[0] != "-Theme") continue;
-
-            if (Theme.TryGet(args[i + 1], out Preload.currentTheme))
-            {
-                Debug.Log($"Loaded custom theme: {args[i + 1]}");
-            }
-
-            break;
-        }
-
-        if (Preload.currentTheme != null) yield break;
+        Theme.TryGet(PrefsManager.theme, out Preload.currentTheme);
+        
         UnityWebRequest request = UnityWebRequest.Get(Global.themeLink);
 
         yield return request.SendWebRequest();
 
-        if (request.result != UnityWebRequest.Result.Success) Error("Theme Request Error.", request.error);
-        else if (Theme.TryGet(request.downloadHandler.text, out Preload.currentTheme))
+        if (request.result == UnityWebRequest.Result.Success)
         {
+            Preload.seasonalTheme = request.downloadHandler.text;
+            if (PrefsManager.seasonalTheme) Theme.TryGet(request.downloadHandler.text, out Preload.currentTheme);
             Debug.Log($"Loaded Theme: {request.downloadHandler.text}");
         }
         else Error($"Couldn't Load Theme: {request.downloadHandler.text}");
+        if (Preload.currentTheme == null) Theme.TryGet("Menu_Space", out Preload.currentTheme);
     }
 
     IEnumerator GetPreviewImages()
@@ -58,13 +43,13 @@ public class PreloadScreen : MonoBehaviour
         if (request.result != UnityWebRequest.Result.Success)
         {
             Error("Couldn't Get Preview Image Count");
-            var taskErr = Cache.ChachePreviewImages(0);
+            var taskErr = Cache.CachePreviewImages(0);
             yield return new WaitUntil(() => taskErr.IsCompleted);
 
             yield break;
         }
 
-        var task = Cache.ChachePreviewImages(int.Parse(request.downloadHandler.text));
+        var task = Cache.CachePreviewImages(int.Parse(request.downloadHandler.text));
         yield return new WaitUntil(() => task.IsCompleted);
     }
 

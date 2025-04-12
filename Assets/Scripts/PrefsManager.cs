@@ -25,6 +25,18 @@ public static class PrefsManager
         set => SetBool("skipIntro", value);
     }
 
+    public static bool seasonalTheme
+    {
+        get => GetBool("seasonalTheme", false);
+        set => SetBool("seasonalTheme", value);
+    }
+
+    public static string theme
+    {
+        get => PlayerPrefs.GetString("theme", "Menu_Space");
+        set => PlayerPrefs.SetString("theme", value);
+    }
+
     private static bool GetBool(string key, bool defaultValue = false)
     {
         return PlayerPrefs.GetInt(key, defaultValue ? 1 : 0) == 1;

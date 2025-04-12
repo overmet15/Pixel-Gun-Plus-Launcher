@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   topBarColor: {r: 0.8113208, g: 0, b: 0.033211835, a: 0.8235294}
   progressBarColor: {r: 0.8117647, g: 0, b: 0.03137255, a: 0.9411765}
+  frameColor: {r: 0.8207547, g: 0.17169583, b: 0.15873085, a: 1}
   backgroundImage: {fileID: 2800000, guid: 3ae3d8a3ce5513f499dd6b6da33f0519, type: 3}
   logoImage: {fileID: 2800000, guid: 0229fd4f1eaa24d42a6aed43fbddd94f, type: 3}

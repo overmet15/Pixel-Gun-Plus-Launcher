@@ -11,7 +11,7 @@ public static class Cache
     public static Dictionary<string, Texture2D> textureCache = new();
     public static Dictionary<string, Task<Texture2D>> currentRequests = new();
 
-    public static async Task ChachePreviewImages(int count)
+    public static async Task CachePreviewImages(int count)
     {
         Preload.previewImages = new Texture2D[count];
 

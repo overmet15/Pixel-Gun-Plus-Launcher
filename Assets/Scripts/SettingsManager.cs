@@ -56,25 +56,14 @@ public class SettingsManager : MonoBehaviour
             }
             else Debug.LogWarning("Cannot move into child directory of current directory or same directory.");
         }
-        
         PrefsManager.gamePath = resultPath;
 
-        Manager.instance.Check(true);
+        Manager.instance.Check();
     }
 
-    // DELETES EVERYTHING IN GAME PATH
     public static void DeleteGame()
     {
-        foreach (string s in Directory.GetFiles(PrefsManager.gamePath))
-        {
-            File.Delete(s);
-        }
-
-        foreach (string s in Directory.GetDirectories(PrefsManager.gamePath))
-        {
-            Directory.Delete(s);
-        }
-
-        Manager.instance.Check(false);
+        Directory.Delete(PrefsManager.gamePath, true);
+        Manager.instance.Check();
     }
 }

@@ -4,9 +4,9 @@ using System.Collections;
 public class Manager : MonoBehaviour
 {
     public static Manager instance { get; private set; }
-    [SerializeField] private UILabel mainText;
-    public UILabel verText;
-    [SerializeField] private GameObject main, downloading, mainScreen, background, outdated;
+    [SerializeField] private TextGroup mainText;
+    public TextGroup verText;
+    [SerializeField] private GameObject main, downloading, mainScreen, background, outdated, deletePopup;
     [SerializeField] private DownloadManager downloadManager;
     [SerializeField] private LauncherUI ui;
 
@@ -26,15 +26,15 @@ public class Manager : MonoBehaviour
 
     private void Start()
     {
-        Check(true);
+        Check();
     }
 
-    public void Check(bool playAnim)
+    public void Check()
     {
-        StartCoroutine(CheckCoroutine(playAnim));
+        StartCoroutine(CheckCoroutine());
     }
 
-    IEnumerator CheckCoroutine(bool playAnim)
+    IEnumerator CheckCoroutine()
     {
         var task = DownloadManager.CheckBuild();
 
@@ -71,11 +71,12 @@ public class Manager : MonoBehaviour
         yield return DownloadManager.CheckBuild();
 
         if (Global.buildState == BuildState.upToDate || Global.buildState == BuildState.unknownBuild) ProcessHandler.StartMonitoringProcess();
-        else Check(false);
+        else Check();
     }
 
     public void OnCreditsButton()
     {
+        ui.mainPanel.SetActive(ui.creditsPanel.activeSelf);
         ui.creditsPanel.SetActive(!ui.creditsPanel.activeSelf);
         ui.newsPanel.SetActive(false);
         ui.settingsPanel.SetActive(false);
@@ -83,6 +84,7 @@ public class Manager : MonoBehaviour
 
     public void OnNewsButton()
     {
+        ui.mainPanel.SetActive(ui.newsPanel.activeSelf);
         ui.newsPanel.SetActive(!ui.newsPanel.activeSelf);
         ui.creditsPanel.SetActive(false);
         ui.settingsPanel.SetActive(false);
@@ -90,6 +92,7 @@ public class Manager : MonoBehaviour
 
     public void OnSettingsButton()
     {
+        ui.mainPanel.SetActive(ui.settingsPanel.activeSelf);
         ui.settingsPanel.SetActive(!ui.settingsPanel.activeSelf);
         ui.creditsPanel.SetActive(false);
         ui.newsPanel.SetActive(false);
@@ -112,6 +115,30 @@ public class Manager : MonoBehaviour
         SettingsManager.OpenPath(PrefsManager.gamePath);
     }
 
+    public void OnUninstallButton()
+    {
+        DeleteConfirmation(true);
+    }
+
+    public void CancelDelete()
+    {
+        DeleteConfirmation(false);
+    }
+
+    public void ConfirmDelete()
+    {
+        ui.manageGameInstalledPanel.SetActive(false);
+        ui.manageGamePanel.SetActive(false);
+        SettingsManager.DeleteGame();
+        DeleteConfirmation(false);
+        Check();
+    }
+
+    public void DeleteConfirmation(bool show)
+    {
+        deletePopup.SetActive(show);
+    }
+
     public void OnChangePathButton()
     {
         if (Global.installed)
@@ -120,7 +147,7 @@ public class Manager : MonoBehaviour
         }
         else
         {
-            SettingsManager.OpenGamePathPicking(true, false);
+            SettingsManager.OpenGamePathPicking(false, false);
         }
     }
 
