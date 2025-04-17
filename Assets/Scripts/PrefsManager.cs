@@ -25,6 +25,12 @@ public static class PrefsManager
         set => SetBool("skipIntro", value);
     }
 
+    public static bool closeOnPlay
+    {
+        get => GetBool("closeOnPlay", true);
+        set => SetBool("closeOnPlay", value);
+    }
+
     public static bool seasonalTheme
     {
         get => GetBool("seasonalTheme", false);

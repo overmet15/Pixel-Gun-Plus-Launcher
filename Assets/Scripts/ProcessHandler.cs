@@ -1,7 +1,6 @@
 using System;
 using System.Diagnostics;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public static class ProcessHandler
 {
@@ -24,13 +23,18 @@ public static class ProcessHandler
             process.Start();
             UnityEngine.Debug.Log("Started and monitoring process.");
         }
-        catch (System.Exception e)
+        catch (Exception e)
         {
             UnityEngine.Debug.LogError("Failed to start process: " + e.Message);
         }
         finally
         {
-            Application.Quit();
+            #if UNITY_EDITOR
+            if (PrefsManager.closeOnPlay) UnityEditor.EditorApplication.ExitPlaymode();
+            #else
+            if (PrefsManager.closeOnPlay) Application.Quit();
+            #endif
+            
         }
     }
 }

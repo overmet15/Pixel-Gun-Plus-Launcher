@@ -55,6 +55,7 @@ public class Manager : MonoBehaviour
             case BuildState.updateNeeded: outdated.SetActive(true); mainText.text = "UPDATE"; Global.installed = true; break;
             case BuildState.upToDate: mainText.text = "PLAY"; Global.installed = true; break;
         }
+        ui.downloadIcon.SetActive(!Global.installed);
     }
 
     public void OnMainButton()
