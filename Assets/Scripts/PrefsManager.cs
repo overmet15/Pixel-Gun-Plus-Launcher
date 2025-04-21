@@ -39,7 +39,7 @@ public static class PrefsManager
 
     public static string theme
     {
-        get => PlayerPrefs.GetString("theme", "Menu_Space");
+        get => PlayerPrefs.GetString("theme", "Menu_North_Pole");
         set => PlayerPrefs.SetString("theme", value);
     }
 
