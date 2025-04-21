@@ -8,7 +8,7 @@ public static class Preload
 {
     public static Theme currentTheme;
 
-    public static string seasonalTheme = "Menu_Space";
+    public static string seasonalTheme = "Menu_North_Pole";
 
     public static Texture2D[] previewImages;
 

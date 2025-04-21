@@ -33,7 +33,7 @@ public class PreloadScreen : MonoBehaviour
             Debug.Log($"Loaded Theme: {request.downloadHandler.text}");
         }
         else Error($"Couldn't Load Theme: {request.downloadHandler.text}");
-        if (Preload.currentTheme == null) Theme.TryGet("Menu_Space", out Preload.currentTheme);
+        if (Preload.currentTheme == null) Theme.TryGet("Menu_North_Pole", out Preload.currentTheme);
     }
 
     IEnumerator GetPreviewImages()
